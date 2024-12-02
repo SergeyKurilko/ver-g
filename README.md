@@ -115,19 +115,67 @@ https://ver-g.ru/
 
 ### Использование
 
-# Для пользователя
+#### Для пользователя
 1. Откройте браузер и перейдите по адресу `http://ver-g.ru/`.
 2. Исследуйте блог.
 3. В разделе `услуги` перейдите по ссылке `обучение` или по адресу `http://ver-g.ru/academy/`
 4. Исследуйте площадку обучения, посмотрите список курсов, выберите подходящий.
 5. Оплатите курс и начните обучение.
 
-# Для администратора
+#### Для администратора
 1. Войдите в админ-панель по адресу `/admin`.
 2. Заполните форму входа.
 3. В панеле выберите необходимое приложение для создания курса обучения, модуля для курса обучения, статьи для блога, промокода, услуги или работы для порфолио.
 
 ### Скриншоты
+#### Общий вид страницы со статьями:
+<img src="screenshots/blog_list_page.png" alt="Запуск бота" width="700">
+
+#### Общий вид страницы списка услуг:
+<img src="screenshots/service_list_page.png" alt="Запуск бота" width="700">
+
+#### Страница услуги "Обучение", она же площадка для обучения:
+<img src="screenshots/education_platform_main.png" alt="Запуск бота" width="700">
+
+#### Страница списка курсов:
+<img src="screenshots/course_list_page.png" alt="Запуск бота" width="700">
+
+#### Страница "Мои курсы" с курсами, на который подписан пользователь:
+<img src="screenshots/my_courses_page.png" alt="Запуск бота" width="700">
+
+#### Страница с описанием курса:
+<img src="screenshots/course_card.png" alt="Запуск бота" width="700">
+<img src="screenshots/course_card_second.png" alt="Запуск бота" width="700">
+
+### Форма оплаты доступа к прохождению курса:
+<img src="screenshots/paid_form.png" alt="Запуск бота" width="700">
+<img src="screenshots/paid_use_promo.png" alt="Запуск бота" width="700">
+
+#### Прохождение шагов курса (перемещение по шагам):
+<img src="screenshots/course_progress.png" alt="Запуск бота" width="700">
+<img src="screenshots/course_progress_second.png" alt="Запуск бота" width="700">
+<img src="screenshots/course_progress_third.png" alt="Запуск бота" width="700">
+<img src="screenshots/course_progress_fourth.png" alt="Запуск бота" width="700">
+
+#### Пример работы бота
+##### Запуск
+<img src="screenshots/bot_1.jpg" alt="Запуск бота" height="500">
+#### Запрос отчета по площадке обучения
+<img src="screenshots/bot_2.jpg" alt="Запуск бота" height="500">
+#### Создание промокода для курса (получение списка курсов) в данном примере он один, т.к. сайт еще не наполнен курсами.
+<img src="screenshots/bot_3.jpg" alt="Запуск бота" height="500">
+#### Выбор размера скидки
+<img src="screenshots/bot_4.jpg" alt="Запуск бота" height="500">
+#### Выбор срока действия промокода
+<img src="screenshots/bot_5.jpg" alt="Запуск бота" height="500">
+#### Информация о созданном промокоде
+<img src="screenshots/bot_6.jpg" alt="Запуск бота" height="500">
+#### Проверка актуальности промокода
+<img src="screenshots/bot_7.jpg" alt="Запуск бота" height="500">
+
+
+
+
 
 
 
