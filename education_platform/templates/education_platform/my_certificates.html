@@ -1,0 +1,93 @@
+{% extends 'education_platform/education_platform_base.html' %}
+
+{% load static %}
+
+{% block ya_metrik %}
+{% endblock %}
+
+{% block title %}
+Мои сертификаты - VER-G ACADEMY
+{% endblock %}
+
+{% block content %}
+
+<div class="overlay d-none">
+    <div class="global_loader_1"></div>
+</div>
+
+<div class="container-fluid container-md avatar-container__wrapper">
+    <div class="container-fluid container-md avatar-container py-2 py-md-4">
+        <div class="row avatar-row">
+
+            <!-- -->
+            <div class="col-12 col-md-3 py-3 avatar-container-col">
+                {% if student.avatar %}
+                <div class="row mb-2 text-center"><h4>{{ student.user.first_name }}</h4></div>
+                <div class="row avatar-image-container justify-content-center">
+                    <span class="circle-avatar-image">
+                        <img class="avatar-img" src="{{ student.avatar.url }}" alt="">
+                    </span>
+                </div>
+                
+                {% else %}
+                <div class="row mb-2 text-center"><h4>{{ student.user.first_name }}</h4></div>
+                <div class="row avatar-image-container justify-content-center">
+                    <span class="circle-avatar-image" style="background-color: #cccccc !important">
+                        <img class="avatar-img" src="{% static 'education_platform/common_icons/blank_avatar.svg' %}" alt="">
+                    </span>
+                </div>
+                
+                {% endif %}
+
+                <hr style="color: rgb(0 0 0 / 18%); background-color: rgb(0 0 0 / 18%);">
+
+                <ul class="list-group avatarStatList">
+                    <li class="list-group-item list-group-item-secondary">Завершено курсов: {{ completed_progresses_count }}</li>
+                    <li class="list-group-item list-group-item-secondary">Всего курсов: {{ total_progresses_count }}</li>
+                    <a href="{% url 'education_platform:my_courses' %}" id="myCoursesDarkButton" type="button" class="btn btn-dark ">Мои курсы</a>
+                    <a href="{% url 'education_platform:my_courses' %}" id="myCertificatesDarkButton" type="button" class="btn btn-dark ">Мои сертификаты</a>
+                </ul>
+            </div>
+            <!-- /avatar-container-col -->
+
+            <!--  -->
+            <div class="col-12 col-md-8 my-certificates ms-md-5 mt-3 mt-md-0">
+                <h3>Мои сертификаты</h3>
+
+                {% for progress in completed_progresses %}
+
+                <div class="my-certificates-sertificate-card-horizontal row mb-2 mb-md-3 mt-1 pt-3">
+                    <div class="col-8">
+                        <div class="certificate-title">
+                            <span>Сертификат №{{ progress.pk }}</span> от {{ progress.completed_date|date:"d.m.Y" }}г.                        
+                        </div>
+                        <div class="course-information">
+                            Выдан за прохождение курса: <span>"{{ progress.training_course.title }}"</span>
+                        </div>
+                        <div class="certificate-detail-link mt-3 pb-3">
+                            <a href="{% url 'education_platform:get_certificate' progress.pk %}">Подробнее</a>
+                        </div>
+                    </div>
+
+                    <div class="col-4 d-flex flex-column align-items-end">
+                        <img src="{% static 'education_platform/images/certificate_images/cerificate-small-sceleton.png' %}" alt="Сертификат" width="125px">
+                    </div>
+                </div>
+                {% empty %}
+                <h6>На этой странице будет список сертификатов по тем курсам, которые были завершены.</h6>
+                {% endfor %}
+            </div>
+            <!-- /my-certificates -->
+
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
+
+{% block extrascripts %}
+<script src="{% static 'education_platform/js/my_courses.js' %}"></script>
+{% endblock %}

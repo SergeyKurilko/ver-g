@@ -1,0 +1,73 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" data-bs-theme="dark">
+  <div class="container-fluid">
+    <!-- brand-menu-wrapper -->
+    <div class="brand-menu-wrapper d-lg-flex">
+      <a class="navbar-brand" href="{% url 'education_platform:home' %}">
+        <img src="{% static 'education_platform/common_icons/ver-g_academ_logo.svg' %}" alt="">
+      </a>
+      <button class="navbar-toggler" id="EducationPlatformNavbarMenuButton" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'education_platform:home' %}" title="На главную">
+              Главная
+            </a>
+          </li>
+          <!-- Каталог -->
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDarkDropdownCatalogMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Каталог
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownCatalogMenuLink">
+              <li><a class="dropdown-item" href="{% url 'education_platform:get_all_courses' %}">Курсы обучения</a></li>
+              <li><a class="dropdown-item" href="{% url 'education_platform:course_pack_list' %}">Пакеты курсов</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'blog:articles_list' %}">
+              Блог о растениях
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'blog:contacts' %}">
+              Контакты
+            </a>
+          </li>
+
+
+          
+        
+
+
+        </ul>
+      </div>
+    </div>
+    <!-- /brand-menu-wrapper -->
+     
+    <!-- auth-button-group -->
+    <div class="auth-button-group-wrapper align-self-center">
+      <div class="auth-button-group" id="authButtonGroup">
+        {% if not request.user.is_authenticated %}
+        <div class="btn btn-secondary ms-3 login-btn-not-auth" id="loginButtonEducationPlatform" data-bs-toggle="modal" data-bs-target="#loginFormModal">Вход</div>
+        <div class="btn btn-secondary ms-1 login-btn-not-auth" id="registerButtonEducationPlatform" data-bs-toggle="modal" data-bs-target="#registerFormModal">Регистрация</div>
+        {% else %}
+        <div class="dropdown d-flex justify-content-end">
+          <div class="btn btn-success dropdown-toggle ms-3 login-btn-is-auth" data-bs-toggle="dropdown" aria-expanded="false" id="loginButtonEducationPlatform">{{ request.user.first_name }} {{ request.user.last_name|slice:1 }}</div>
+          <ul class="dropdown-menu dropdown-profile-menu max" aria-labelledby="loginButtonEducationPlatform">
+            <li><a class="dropdown-item" href="{% url 'education_platform:get_my_personal_account' %}">Профиль</a></li>
+            <li><a class="dropdown-item" href="{% url 'education_platform:my_courses' %}">Мои курсы</a></li>
+            <li><a class="dropdown-item" href="{% url 'education_platform:my_certificates' %}">Мои сертификаты</a></li>
+            <hr class="dropdown-divider">
+            <li><a class="dropdown-item" href="{% url 'education_platform:logout' %}">Выход</a></li>
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <!-- /auth-button-group -->
+  </div>
+</nav>

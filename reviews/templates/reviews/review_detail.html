@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block description_meta %}{{ review.service }}{% endblock %}
+{% block title %}{{ review.service }}{% endblock %}
+
+{% block content %}
+
+    <div class="service_category_detail_header">
+        <div class="service_category_detail_line"></div>
+        <div class="service_category_detail_title">{{ review.service }}</div>
+        <div class="service_category_detail_line"></div>
+    </div>
+
+
+    <div class="portfolio-carousel-container container ">
+        <div class="portfolio-detail-slider">
+
+            <div class="portfolio-detail-slider-item">
+                <a href="{{ review.image.url }}"><img src="{{ review.image.url }}" alt=""></a>
+            </div>
+
+        </div>
+    </div>
+
+    {% if review.text %}
+    <div class="portfolio-detail-description container">
+        {{ review.text }}
+    </div>
+    {% endif %}
+
+{% include 'blog/incl/b_modal.html' %}
+
+    <div class="article_detail_button" style="top: 186px !important; position: relative !important;">
+        <button type="button" class="contact-us large_btn" data-bs-toggle="modal" data-bs-target="#get_consultation">
+        Задать вопрос
+        </button>
+    </div>
+
+{% block extrascripts %}
+
+{% endblock %}
+{% endblock %}
+

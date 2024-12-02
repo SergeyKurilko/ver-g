@@ -1,0 +1,55 @@
+<div class="offcanvas offcanvas-start" tabindex="+2" id="offcanvasPointList" aria-labelledby="Содержание">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Содержание курса</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body pt-0">
+    <img class="mb-1" src="{{ course.image.url }}" alt="" width="150px" height="auto">
+    <h4>{{ course.title }}</h4>
+    <div class="progress" style="height: 6px">
+      <div class="progress-bar course-progress" role="progressbar" style="width: {{ completed_course_in_percent|floatformat:'0' }}%; height: 6px;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <div class="container course_completed_points">
+        <p>{{ completed_course_in_percent|floatformat:"0" }}% курса пройдено</p>
+    </div>
+
+
+    {% for block in data_for_points_list %}
+
+    <div class="point-list-left-menu-accordion accordion accordion-flush mt-3" id="accordionForBlock{{ block.block_number }}">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flushHeadingForBlock{{ block.block_number }}">
+          <button class="accordion-button collapsed ps-3 mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseForBlock{{ block.block_number }}" aria-expanded="false" aria-controls="flush-collapseForBlock{{ block.block_number }}">
+            {{ block.block_number }}. {{ block.block_title }}
+          </button>
+        </h2>
+      <div id="flush-collapseForBlock{{ block.block_number }}" class="accordion-collapse collapse" aria-labelledby="flushHeadingForBlock{{ block.block_number }}" data-bs-parent="#accordionForBlock{{ block.block_number }}">
+
+        <div class="accordion-body ps-2">
+          {% for point in block.points_list %}
+
+          <a class="row mb-2 flex-nowrap" title="{{ point.title }}" href="{{ point.url }}" style="text-decoration: none; color: black">
+            <div class="point_detail-number-and-title ms-2 col-11 {% if point.is_current %}active_point_in_points_list{% endif %}">
+              {{ block.block_number }}. {{ point.number }} {{ point.title }}
+            </div>
+            {% if point.completed %}
+            <div class="col-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="chartreuse" class="bi bi-check-circle-fill" viewBox="0 0 16 16" style="box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3); border-radius: 50px;">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+              </svg>
+            </div>
+                {% endif %}
+          </a>
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+
+</div>
+
+
+

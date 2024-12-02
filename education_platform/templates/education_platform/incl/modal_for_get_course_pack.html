@@ -1,0 +1,62 @@
+{% load humanize %}
+
+<!-- Modal for get course pack-->
+<div class="modal fade" id="modalForPaidCoursePack" tabindex="-1" aria-labelledby="modalForPaidCoursePackLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <form action="{% url 'education_platform:create_transaction' %}" method="post">
+            <input type="hidden" name="product_type" value="{{ product_type }}">
+            <input type="hidden" name="product_id" value="{{ product_id }}">
+            <input type="hidden" name="amount" value="{{ amount }}">
+            <input type="hidden" name="course_pack_title" value="{{ course_pack_title }}">
+
+            <div class="payment-detail-container mb-4">
+              <div class="payment-detail-header me-4">
+                <h3>Оплата доступа к пакету курсов: {{ course_pack_title }}</h3>
+              </div>
+              <div class="payment-course-pack-description">
+                <div class="" style="font-weight: 500;">В пакет входят:</div>
+                <div class="">
+                  <ol class="">
+                    {% for course in courses %}
+                    <li>{{ course.title }}</li>
+                    {% endfor %}
+                  </ol>
+                </div>
+              </div>
+              <div class="payment-detail-email-row mt-4 row">
+                <div class="email col-5 col-md-3">
+                  Ваш email
+                </div>
+                <div class="col-md-2 col-4 user-email" title="На этот адрес придет подтверждение оплаты. Изменить его можно в настройках профиля.">
+                  {{ user_email }}
+                </div>                
+              </div>
+              <div class="payment-detail-amount-row row mt-2 align-items-center">
+                <div class="amount-col col-5 col-md-3">
+                  Стоимость
+                </div>
+                <div class="amount-value-col col-4 col-md-3">
+                  <span class="amount-val">{{ amount|floatformat:"0"|intcomma }}</span> <span>₽</span>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-success">Оплатить</button>
+            
+          </form>
+
+          <div class="div course-by-agreement mt-4">
+            Оплачивая доступ к этому курсу, вы соглашаетесь с условиями <a target="_blank" href="{% url 'blog:terms' %}">пользовательского соглашения.</a> 
+            Если у вас возникли проблемы с оплатой, напишите нам на help@ver-g.ru
+          </div>
+
+          
+
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

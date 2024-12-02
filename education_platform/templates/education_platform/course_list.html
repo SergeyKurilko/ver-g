@@ -1,0 +1,275 @@
+{% extends 'education_platform/education_platform_base.html' %}
+{% load static %}
+{% load education_platform_filters %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'education_platform/css/animate.min.css' %}">
+{% endblock %}
+
+{% block title %}
+Курсы обучения стр.{{ page_obj.number }} - VER-G ACADEMY
+{% endblock %}
+
+{% block content %}
+
+<!---->
+{% if not request.user.is_authenticated %}
+
+{% include 'education_platform/incl/login_form.html' %}
+{% include 'education_platform/incl/register_form.html' %}
+{% include 'education_platform/incl/reset_password_form.html' %}
+
+{% endif %}
+<!---->
+
+<main class="main">
+    <section class="all-courses-list-section">
+        <div class="container-lg container-fluid">
+            <div class="col">
+                <div class="row">
+
+                    <div class="d-none d-md-block col-md-3 filters-сol">
+                        <div class="compact-filter-menu-header d-md-none d-flex flex-row container justify-content-between mb-2">
+                            <div class="compact-filter-menu-title">
+                                <h4>Фильтр:</h4>
+                            </div>
+                            <div class="compact-filter-menu-close">
+                                <button class="btn-close"></button>
+                            </div>
+                        </div>
+
+
+                        <div class="filters sticky-top">
+                            <form action="{% url 'education_platform:get_all_courses' %}" id="filterForm">
+
+                                <div class="filter-form-accordion accordion" id="filterFormAccordion">
+                                    <h4 class="d-none d-md-block">Фильтр</h4>
+
+                                    <div class="accordion-item difficulty-filters-accordion-item mb-3">
+                                        <h2 class="accordion-header" id="headingOne">
+                                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDifficultyFilter" aria-expanded="true" aria-controls="collapseOne">
+                                              <div class="price-filter-title">Уровень сложности</div>
+                                          </button>
+                                        </h2>
+                                        <div id="collapseDifficultyFilter" class="accordion-collapse collapse show" aria-labelledby="headingOne" ">
+                                          <div class="accordion-body">
+                                              <div class="difficulty-filters">
+                                                  <div class="difficulty-filters-checks me-3">
+
+                                                    <div class="level-check mt-1">
+                                                        <input class="form-check-input" type="checkbox" name="easy_level" id="easy_level">
+                                                        <label for="easy_level" class="ms-2 mt-1">Начальный уровень</label>
+                                                    </div>
+
+                                                    <div class="level-check mt-1">
+                                                        <input class="form-check-input" type="checkbox" name="normal_level" id="normal_level">
+                                                        <label for="normal_level" class="ms-2 mt-1">Средний уровень</label>
+                                                    </div>
+
+                                                    <div class="level-check mt-1">
+                                                        <input class="form-check-input" type="checkbox" name="hard_level" id="hard_level">
+                                                        <label for="hard_level" class="ms-2 mt-1">Высокий уровень</label>
+                                                    </div>
+
+                                                  </div>
+              
+                                              </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <!-- difficulty-filters-accordion-item -->
+
+
+                                    <div class="accordion-item price-filters-accordion-item">
+                                      <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFriceFilter" aria-expanded="true" aria-controls="collapseOne">
+                                            <div class="price-filter-title">Цена</div>
+                                        </button>
+                                      </h2>
+                                      <div id="collapseFriceFilter" class="accordion-collapse collapse show" aria-labelledby="headingOne" >
+                                        <div class="accordion-body">
+                                            <div class="price-filters">
+                                                <div class="price-filter-inputs me-3">
+                                                    <span class="me-2">от</span> <input type="number" max="99999" name="price_from" id="price_from" class="form-control">
+                                                    <span class="ms-2 me-2">до</span> <input type="number" max="99999" name="price_to" id="price_to" class="form-control">
+                                                </div>
+
+                                                <div class="free-toggle mt-3">
+                                                    <span for="free_check" class="me-3 mt-1">Бесплатные</span>
+                                                    <input class="form-check-input" type="checkbox" name="free" id="free_check">
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!-- /price-filters-accordion-item -->
+
+                                    <div class="">
+                                        <div class="btn btn-success mt-3 mb-2 d-md-none" id="applyCompactFiltersButton">Применить</div>
+                                    </div>
+
+                                    <div class="">
+                                        <button class="btn reset-filter-in-filters resetFiltersButton" id="" >Сбросить фильтр</button>
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                            <div class="btn1_container">
+                                <span class="one"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /filters-сol -->
+
+
+                    
+                    <div class="col-md-9 col-12 ps-md-5">
+
+                        <div class="row mt-2 mt-md-0">
+                            <div class="selected-filters-list ps-md-0 d-flex flex-row col-11">
+                                
+                            </div>
+                        
+                            <div class="compact-filter-place d-md-none col-1">
+                                <div class="" id="compactFiltersMenuButton">
+                                    <svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="image-loader" style="position: absolute; top: 50%; left: 50%; display: none;"></div>
+
+                        {% if no_published_courses %}
+                        <div class="row all-course-list-row">
+                        <h3>Нет опубликованных курсов</h3>
+                        </div>
+                        {% else %}
+
+                        <div class="row all-course-list-row">
+                            {% for course in page_obj %}
+                            <div class="course-card-horizontal d-flex flex-row mb-2 mt-1 p-3 pt-0 ps-md-0">
+
+                                <div class="course-logo d-flex flex-column align-items-center me-3">
+                                    <img src="{{ course.image.url }}" alt="Обложка">
+                                </div>
+
+                                <div class="course-main-info d-flex flex-column">
+                                    <div class="course-author-title-price d-flex flex-row mb-2">
+                                        <div class="course-h-card-title-author col-8">
+                                            <a href="{{ course.get_absolute_url}}"><h3>{{ course.title }}</h3></a>
+                                            <span class="course-h-card-author">{{ course.author }}</span> 
+
+                                        </div>
+                                        <div class="course-h-card-price col-3 text-end d-flex flex-column align-items-end">
+                                            {% if course.is_free %}<span class="free-course-h-card">Бесплатно</span>
+                                            {% else %}
+                                                {% if course.discount > 0 %}
+                                                <span class="price-course-h-card-with-discount" >{{ course.price|calculate_discounted_price:course.discount|floatformat:"g" }} ₽</span>
+                                                <span class="price-course-h-card-without-discount">{{ course.price|floatformat:"g" }} ₽</span>
+                                                {% else %}
+                                                <span class="price-course-h-card">{{ course.price|floatformat:"g" }} ₽</span>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="course-description">
+                                        {{ course.description|truncatewords:"40"|safe }}
+                                    </div>
+                                    <div class="course-widgets">
+                                        <span>{{ course.completed_counter }}</span><img src="{% static 'education_platform/common_icons/person.svg' %}" alt="">
+                                        <span class="me-1">{{ course.time_to_study }}</span><img src="{% static 'education_platform/common_icons/clock.svg' %}" alt="">
+                                        <br><span>{{ course.get_difficulty_display }} сложности.</span>
+                                        {% if not course.subscribed %}
+                                        <div class="course-card-detail-button mt-3 pb-4">
+                                            <a class="ms-0" href="{{ course.get_absolute_url }}">Подробнее</a>
+                                        </div>
+                                        {% else %}
+                                        <div class="">
+                                            <span style="color: green; font-weight: 500;">Вы подписаны.</span>
+                                        </div>
+                                        <div class="course-card-detail-button mt-1 pb-4">
+                                            <a class="ms-0" href="{{ course.get_absolute_url }}">Открыть</a>
+                                        </div>
+                                        {% endif %}
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            {% empty %}
+                            <div class="mb-2 mt-1 p-3">
+                                <h5>Нет совпадений. Попробуйте изменить условия фильтра или 
+                                </h5>
+                                <button id="FilterReset" class="btn resetFiltersButton">Сбросить фильтр</button>
+                            </div>
+                            {% endfor %}
+
+                            {% if page_obj.paginator.num_pages > 1 %}
+                            <div id="pagination" class="my-4 d-flex justify-content-center d-md-block">
+                                {% for p in page_obj.paginator.page_range %}
+                                {% if page_obj.number == p %}
+                                <a class="paginator-link-active me-1" href="?page={{ p }}">{{ p }}</a>
+                                {% else %}
+                                <a class="paginator-link me-1" href="?page={{ p }}">{{ p }}</a>
+                                {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <a class="paginator-next-button" href="?page={{ page_obj.next_page_number }}">
+                                        Далее
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                                        </svg>
+                                    </a>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            
+                        </div>
+                        {% endif %}
+                        <!-- /all-course-list-row -->
+                         
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section class="load-more-courses-section mb-5">
+        <div class="container-lg container-fluid">
+            <div class="col">
+                <div class="row">
+                    <div class="text-center" id="load-more-courses-button">Показать еще</div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+</main>
+
+<div id="buttonMoveToStartPage" class="move-to-start-button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-arrow-up" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
+    </svg>
+</div>
+
+
+
+
+
+
+{% endblock %}
+
+{% block extrascripts %}
+<script src="{% static 'education_platform/js/course_list.js' %}"></script>
+
+{% if not request.user.is_authenticated %}
+<script src="{% static 'education_platform/js/auth_scripts.js' %}"></script>
+<script src="{% static 'education_platform/js/password_reset_script.js' %}"></script>
+{% endif %}
+{% endblock %}

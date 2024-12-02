@@ -1,0 +1,109 @@
+{% load education_platform_filters %}
+{% load static %}
+{% load cache %}
+
+<div class="container-fluid comments-place__wrapper">
+    <div class="comments-place__container container-fluid container-md">
+
+        <div class="current_step_number">
+            <h5 class="text-muted">Шаг {{ step.number }}</h5>
+        </div>
+
+        <div class="comments_header mt-3">
+            <h4>{{ step.comments.all.count }} {{ step.comments.all.count|pluralize_comments }}</h4>
+        </div>
+
+
+        <div class="add_new_comment mt-3 mb-4">
+            <div class="row align-items-end">
+                <div class="col-2 col-md-1 d-flex flex-column align-items-end">
+                    {% if user.student.avatar %}
+                    <img class="step_avatar-image" src="{{ user.student.avatar.url }}" alt="Аватар">
+                    {% else %}
+                    <div class="step_avatar-image no-foto d-flex align-items-center"><span>Нет фото</span></div>
+                    {% endif %}
+                </div>
+                <div class="col-10 col-md-11" style="border-bottom: 1px solid #e9dddd;">
+                    <span class="add_new_comment_button">Оставить комментарий</span>
+                </div>
+
+                {% include 'education_platform/incl/new_comment_form.html' %}
+
+            </div>
+        </div>
+
+
+<!--        Все комментарии-->
+        <div class="all_comments-wrapper mt-3">
+
+
+
+            {% for comment in step_comments %}
+
+            {% if not comment.parent %}
+
+            <div class="comment_item row mb-2" id="{{ comment.pk }}">
+
+
+                <div class="col-2 col-md-1 d-flex flex-column align-items-end comment_item__avatar-place">
+                    {% if comment.author.student.avatar %}
+                    <img class="step_avatar-image" src="{{ comment.author.student.avatar.url }}" alt="Аватар">
+                    {% else %}
+                    <div class="step_avatar-image no-foto d-flex align-items-center"><span>Нет фото</span></div>
+                    {% endif %}
+                </div>
+                <div class="col-10 comment_item__comment-body">
+                    <div class="row">
+                        <div class="">
+                            <span class="fw-bold mb-1">{{ comment.author.first_name }} {{ comment.author.last_name }}</span>
+                            <span>{{ comment.published|date:"d.m.Y" }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="fw-normal">{{ comment.text|safe }}</span>
+                    </div>
+
+                    <div class="col">
+                        <div class="">
+                            <span id="{{ comment.pk }}" class="comments-answer-button">Ответить</span>
+                            {% if comment.answers.count > 0 %} &nbsp; &nbsp;
+                            <span id="{{ comment.pk }}"
+                            class="comments-answers_list-button"
+                            get_answers_list_url = {% url "education_platform:get_answers_for_comment" comment.pk %}
+                            >
+                            Посмотреть ответы
+                            </span>
+                            <span id="{{ comment.pk }}"
+                            class="comments-answers_list-close-button"
+                            style="display: none;"
+                            >
+                            Свернуть
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                                    <!--                -->
+                {% include 'education_platform/incl/answer_comment_form.html' %}
+                <!--                -->
+
+                    <!--answers-->
+
+                    <div class="all_answers-wrapper-for-comment-{{ comment.pk }} mt-3" style="display: none">
+                    <!--get from ajax-->
+                    </div>
+                    <!--end answers-->
+
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+        {% endfor %}
+
+        </div>
+    </div>
+</div>

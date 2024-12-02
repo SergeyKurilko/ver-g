@@ -1,0 +1,49 @@
+{% load static %}
+{% load education_platform_filters %}
+
+<div class="course-card">
+    <div class="course-card-top">
+        <a href="{{ course.get_absolute_url }}"><span>{{ course.title }}</span></a>
+        <img src="{{ course.image.url }}" alt="">
+        <span class="course-card-author mb-1">Автор: {{ course.author }}</span>
+    </div>
+    <div class="course-card-description">
+        {{ course.description|truncatewords:10|safe }}
+    </div>
+    <div class="course-card-widgets">
+        <div label="Изучили курс">
+            {{ course.completed_counter }}<img src="{% static 'education_platform/common_icons/person.svg' %}" alt="">
+        </div>
+        <div class="ms-3 course-card-widget-time" label="Время изучения">
+            <span class="me-1">{{ course.time_to_study }}ч.</span><img src="{% static 'education_platform/common_icons/clock.svg' %}" alt="">
+        </div>
+    </div>
+    <div class="course-card-price">
+        {% if course.is_free %}
+        <span class="course-free-price">Бесплатно</span>
+        {% else %}
+
+            {% if course.discount > 0 %}
+            <div class="">
+                <span class="price-with-discount">
+                    {{ course.price|calculate_discounted_price:course.discount|floatformat:"g" }} ₽
+                </span>
+                <span class="price-without-discount">{{ course.price|floatformat:"g" }} ₽</span>
+            </div>
+            {% else %}
+            <span class="course-not-free-price">{{ course.price|floatformat:"g" }} ₽</span>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="course-card-detail-button mt-2">
+        <a class="" href="{{ course.get_absolute_url }}">Подробнее</a>
+    </div>
+
+    {% if course.discount > 0 %}
+    <div class="course-card-promo">
+        <div class="offer-sell">Скидка!</div>
+        <div class="offer-new">-{{ course.discount|floatformat:"0" }}%</div>
+    </div>
+    {% endif %}
+
+</div>

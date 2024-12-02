@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'education_platform/css/certificate_style.css' %}">
+    <title>Certificate {{ progress_pk }}</title>
+    <style>
+        @page {
+            margin: 0 0 0 3px;
+            size: 7.5in 5.5in;
+            }
+        @font-face {
+        font-family: Montserrat;
+        src: url(Montserrat-MediumItalic.ttf);
+        font-weight: normal;
+        font-style: italic;
+            }
+
+        @font-face {
+        font-family: Montserrat;
+        src: url(Montserrat-Bold.ttf);
+        font-weight: bold; /* Указываем, что это жирный шрифт */
+        font-style: normal;
+            }
+
+        @font-face {
+        font-family: Montserrat;
+        src: url(Montserrat-BoldItalic.ttf);
+        font-weight: bold; /* Указываем, что это жирный шрифт */
+        font-style: italic;
+            }
+    </style>
+</head>
+
+<body>
+        <div class="total-border-wrapper">
+            <img src="{% static 'education_platform/images/certificate_images/certificate_border.png' %}" alt="" class="certificate_border_img">
+            <a href="https://www.ver-g.ru" class="ver-g-link">ver-g.ru</a>
+            <div class="header_container_1">АКАДЕМИЯ ФИТОДИЗАЙНА ВЕРТОГРАД</div>
+            <div class="header_container_2">VER-G ACADEMY</div>
+            <div class="header_container_sertificate_num">СЕРТИФИКАТ № <span>{{ cert_num }}</span></div>
+            <div class="body_container_1">настоящий сертификат подтверждает, что</div>
+            <div class="name_container">{{ student_name }}</div>
+            <div class="course_name_container">"{{ course_name }}"</div>
+            <div class="line_1"></div>
+            <div class="line_2"></div>
+            <div class="body_container_2">успешно завершил/а курс</div>
+            <div class="footer-left-line"></div>
+            <div class="signature_place">
+                <img class="signature_img"
+                    src="{{ author_signature }}"
+                    alt="">
+            </div>
+            <div class="footer-right-line"></div>
+            <div class="creator_inform_container">
+                {{ author_title }}
+                <br><br>
+                <span class="author_course_name">
+                    {{ course_author }}
+                </span>
+            </div>
+            <div class="date_string_container">{{ completed_date|date:"d.m.Y" }}г.</div>
+            <div class="date_inform_container">Дата завершения курсаc</div>
+            <div class="footer_logo_container">
+                <img src="{% static 'education_platform/images/certificate_images/footer_logo.svg' %}" alt="" class="footer_logo_img">
+            </div>
+        </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+
+{% block description_meta %}Здесь Вы найдете проекты, воплощенные в жизнь, инетересные растения и дизайн проекты нашей команды. Закажи по тел.: +7-929-985-63-24. Москва{% endblock %}
+{% block title %}Примеры наших работ{% endblock %}
+
+{% block content %}
+
+    <div class="service_category_detail_header">
+        <div class="service_category_detail_line"></div>
+        <div class="service_category_detail_title">Отзывы наших клиентов</div>
+        <div class="service_category_detail_line"></div>
+    </div>
+
+    <div class="blog_article_list"">
+    {% for review in reviews %}
+    <div class="blog_article_item">
+        <div class="blog_article_item-img">
+            <img src="{{ review.image.url }}" alt="">
+        </div>
+        <div class="blog_article_item_text">
+            <div class="blog_article_item_text-title">
+                <a href="{{ review.get_absolute_url }}"><h3>{{ review.service }}</h3></a>
+            </div>
+            <div class="blog_article_item_text-line"></div>
+
+        <div class="blog_article_item_text-description">
+            {{ review.text|truncatewords:13 }}
+        </div>
+        <div class="blog_article_item_text-detail">
+            <a href="{{ review.get_absolute_url }}">Открыть отзыв</a>
+        </div>
+        </div>
+    </div>
+        {% endfor %}
+    </div>
+
+{% include 'blog/incl/paginator.html' %}
+
+
+{% endblock %}

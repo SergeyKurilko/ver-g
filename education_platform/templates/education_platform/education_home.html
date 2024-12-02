@@ -1,0 +1,223 @@
+{% extends 'education_platform/education_platform_base.html' %}
+{% load static %}
+{% load cache %}
+
+{% block title %}VER-G ACADEMY обучение в области интерьерного озеленения.{% endblock %}
+
+{% block pre_head %}
+<link rel="stylesheet" href="{% static 'education_platform/owlcarousel/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'education_platform/owlcarousel/owl.theme.default.min.css' %}">
+{% endblock %}
+
+
+
+
+
+{% block content %}
+
+
+<!---->
+{% if not request.user.is_authenticated %}
+
+{% include 'education_platform/incl/login_form.html' %}
+{% include 'education_platform/incl/register_form.html' %}
+{% include 'education_platform/incl/reset_password_form.html' %}
+
+{% endif %}
+<!---->
+
+{% cache 3600 homepage_content %}
+
+<main class="main">
+  <section class="promo-banner-section py-2">
+    <div class="container-lg container-fluid">
+          <div class="homepage-banner row justify-content-center">
+            <div class="homepage-banner-large d-none d-md-block">
+            <img src="{% static 'education_platform/images/banner-background.png' %}" alt="">
+            </div>
+            <div class="homepage-compact-banner d-md-none row align-items-center">
+              <div class="homepage-compact-banner-text col-9 col-sm-10">
+                <h4>Профессиональное <br> озеленение - в <span>твоих руках!</span></h4>
+              </div>
+              <div class="col-3 col-sm-2 homepage-compact-banner-logo py-2">
+                <img src="{% static 'education_platform/common_icons/ver-g_academ_logo.svg' %}" alt="Логотип">
+              </div>
+            </div>
+          </div>
+    </div>
+  </section>
+  <!-- /promo-banner-section -->
+
+  <section class="latest-course-carousel-section py-2">
+    <div class="container-lg container-fluid">
+      <div class="row">
+        <div class="col">
+
+          {% if not latest_courses.all.count < 1 %}
+
+          <div class="section_title text-center text-md-start">
+            <a href="{% url 'education_platform:get_all_courses' %}"><h2>Курсы обучения</h2></a>
+          </div>
+
+          <div class="owl-carousel owl-theme owl-carousel-latest-courses">
+
+            {% for course in latest_courses.all %}
+            
+              {% include 'education_platform/incl/course_card_item.html' %}
+            
+            {% endfor %}
+
+
+            <div class="course-card last-course-card">
+                <div class="get-all-course px-2 px-md-0">
+                  <a href="{% url 'education_platform:get_all_courses' %}"><h5>Посмотреть все курсы</h5></a>
+                </div>
+                <div class="course-card-vg-logo">
+                  <img src="{% static 'education_platform/images/vg_with_back.svg' %}" alt="">
+                </div>
+                <div class="course-card-vg-logo-2">
+                  <img src="{% static 'education_platform/images/vg_with_back.svg' %}" alt="">
+                </div>
+                <div class="course-card-vg-logo-3">
+                  <img src="{% static 'education_platform/images/vg_without_back.svg' %}" alt="">
+                </div>
+                <div class="course-card-vg-logo-4">
+                  <img src="{% static 'education_platform/images/vg_with_back.svg' %}" alt="">
+                </div>
+            </div>
+          </div>
+
+          <div class="next-course-card-owl-button position-md-absolute">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg>
+          </div>
+          
+          <!-- /carousel body -->
+
+          <div class="get-all-course-bottom px-2 px-md-0">
+            <a href="{% url 'education_platform:get_all_courses' %}"><h5>Посмотреть все курсы</h5></a>
+          </div>
+
+          {% else %}
+
+          <div class="section_title text-center text-md-start">
+            <h2>Курсы обучения</h2>
+          </div>
+
+          <div class="section_title text-center text-md-start">
+            <h3>Нет опубликованных курсов</h3>
+          </div>
+
+          <div class="get-all-course-bottom ver-g-disabled-button px-2 px-md-0">
+            <h5>Посмотреть все курсы</h5>
+          </div>
+
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ latest course section -->
+
+
+  <section class="latest-course-packs-carousel-section">
+    <div class="container-lg container-fluid">
+      <div class="row">
+        <div class="col">
+
+          {% if not latest_course_packs.all.count < 1 %}
+
+          <div class="section_title text-center text-md-start">
+            <a href="{% url 'education_platform:course_pack_list' %}"><h2>Пакеты курсов</h2></a>
+          </div>
+
+
+          <div class="owl-carousel owl-theme owl-carousel-latest-course-packs">
+
+            {% for course_pack in latest_course_packs.all %}
+            
+              {% include 'education_platform/incl/course_pack_card_item.html' %}
+            
+            {% endfor %}
+
+            <div class="course-card last-course-card">
+              <div class="get-all-course">
+                <a href="{% url 'education_platform:course_pack_list' %}"><h5>Посмотреть все пакеты курсов</h5></a>
+              </div>
+              <div class="course-card-vg-logo">
+                <img src="{% static 'education_platform/images/vg_with_back.svg' %}" alt="">
+              </div>
+              <div class="course-card-vg-logo-2">
+                <img src="{% static 'education_platform/images/vg_with_back.svg' %}" alt="">
+              </div>
+              <div class="course-card-vg-logo-3">
+                <img src="{% static 'education_platform/images/vg_without_back.svg' %}" alt="">
+              </div>
+              <div class="course-card-vg-logo-4">
+                <img src="{% static 'education_platform/images/vg_with_back.svg' %}" alt="">
+              </div>
+            </div>
+          </div>
+
+          <div class="next-course-pack-card-owl-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg>
+          </div>
+          <!-- /carousel body -->
+
+          <div class="get-all-course-bottom px-2 px-md-0">
+            <a href="{% url 'education_platform:course_pack_list' %}"><h5>Посмотреть все пакеты курсов</h5></a>
+          </div>
+
+          {% else %}
+
+          <div class="section_title text-center text-md-start">
+            <h2>Пакеты курсов</h2>
+          </div>
+
+          <div class="section_title text-center text-md-start">
+            <h3>Пока ничего нет</h3>
+          </div>
+
+          <div class="get-all-course-bottom ver-g-disabled-button px-2 px-md-0">
+            <h5>Посмотреть все пакеты курсов</h5>
+          </div>
+
+          {% endif %}
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ latest-course-pockets section -->
+
+  
+
+  
+
+</main>
+
+{% endcache %}
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block extrascripts %}
+<script src="{% static 'education_platform/js/homepage_script.js' %}"></script>
+<script src="{% static 'education_platform/owlcarousel/owl.carousel.min.js' %}"></script>
+{% if not request.user.is_authenticated %}
+<script src="{% static 'education_platform/js/auth_scripts.js' %}"></script>
+<script src="{% static 'education_platform/js/password_reset_script.js' %}"></script>
+{% endif %}
+{% endblock %}

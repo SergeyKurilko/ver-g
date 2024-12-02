@@ -1,0 +1,12 @@
+<div class="form-for-new_comment_wrapper form-for-new_comment_wrapper__hide">
+  <form class="form_for_new_comment mt-4"
+        action="{% url 'education_platform:ajax_add_new_comment_for_step' step.pk %}"
+        method="post">
+    {% csrf_token %}
+    <div id="editor-new_comment"></div>
+    <input type="hidden" name="comment_text" class="form-control">
+
+    <button class="btn btn-success mt-3 send_new_comment_button" type="submit" disabled="true">Отправить</button>
+    <button class="btn btn-light mt-3 cancel_send_new_comment_button">Отменить</button>
+  </form>
+</div>

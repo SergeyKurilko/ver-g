@@ -1,0 +1,173 @@
+{% extends 'education_platform/education_platform_base.html' %}
+
+{% load static %}
+
+{% block ya_metrik %}
+{% endblock %}
+
+{% block title %}
+Мой профиль - VER-G ACADEMY
+{% endblock %}
+
+{% block content %}
+
+<div class="overlay d-none">
+    <div class="global_loader_1"></div>
+</div>
+
+<div class="container-fluid avatar-container__wrapper">
+    <div class="container-fluid container-md avatar-container py-2 py-md-4">
+        <div class="row avatar-row">
+
+            <!-- -->
+            <div class="col-12 col-md-3 py-3 avatar-container-col" style="max-height: 492px;">
+                {% if student.avatar %}
+                <div class="row mb-2 text-center"><h4>{{ student.user.first_name }}</h4></div>
+                <div class="row avatar-image-container justify-content-center">
+                    <span class="circle-avatar-image">
+                        <img class="avatar-img" src="{{ student.avatar.url }}" alt="">
+                    </span>
+                </div>
+                <form action="{% url 'education_platform:avatar_upload' %}" id="avatarUploadForm" class="row justify-content-center" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" accept="image/*" id="avatarInput" name="avatar" style="display: none;">
+                    <div class="mt-2" id="uploadAvatarButton">
+                        Изменить аватар
+                    </div>
+                </form>
+                {% else %}
+                <div class="row mb-2 text-center"><h4>{{ student.user.first_name }}</h4></div>
+                <div class="row avatar-image-container justify-content-center">
+                    <span class="circle-avatar-image" style="background-color: #cccccc !important">
+                        <img class="avatar-img" src="{% static 'education_platform/common_icons/blank_avatar.svg' %}" alt="">
+                    </span>
+                </div>
+                <form action="{% url 'education_platform:avatar_upload' %}" id="avatarUploadForm" class="row justify-content-center" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" accept="image/*" id="avatarInput" name="avatar" style="display: none;">
+                    <div class="mt-2" id="uploadAvatarButton">
+                        Загрузить аватар
+                    </div>
+                </form>
+                {% endif %}
+
+                <hr style="color: rgb(0 0 0 / 18%); background-color: rgb(0 0 0 / 18%);">
+
+                <ul class="list-group avatarStatList">
+                    <li class="list-group-item list-group-item-secondary">Завершено курсов: {{ completed_courses_count }}</li>
+                    <li class="list-group-item list-group-item-secondary">Курсов в изучении: {{ progresses.all.count }}</li>
+                    <a href="{% url 'education_platform:my_courses' %}" id="myCoursesDarkButton" type="button" class="btn btn-dark ">Мои курсы</a>
+                    <a href="{% url 'education_platform:my_certificates' %}" id="myCertificatesDarkButton" type="button" class="btn btn-dark ">Мои сертификаты</a>
+                </ul>
+
+
+
+
+            </div>
+            <!-- -->
+
+            <!-- -->
+
+            <!-- -->
+
+            <div class="col-12 col-md-8 personal-data ms-md-5 mt-3 mt-md-0 p-3">
+                <div class="col">
+                    <div class="row w-75">
+                        <h4 class="ps-0">Персональные данные</h4>
+                    </div>
+                    <div class="row w-100">
+                        <p class="ps-0">Введите корректные персональные данные, они будут использованы для выпуска сертификата о прохождении обучения.</p> 
+                        <p class="ps-0">
+                            <span style="color: red">Изменить персональные данные можно не более двух раз!</span>
+                            <br>
+                            {% if student.edit_limit > 0 %}
+                            <span>Вы можете изменить персональные данные еще: 
+                                {% if student.edit_limit == 2 %}
+                                <b>2 раза</b>.
+                                {% elif student.edit_limit == 1 %}
+                                <b>1 раз</b>.
+                                {% endif %}
+                            </span>
+                            {% else %}
+                            <span>Лимит изменений персональных данных исчерпан. Если у вас есть вопросы, то напишите нам 
+                                <a href="mailto:help@ver-g.ru">help@ver-g.ru</a>
+                            </span>
+                            {% endif %}
+                            
+                        </p>
+                    </div>
+                </div>
+
+                <form class="col form_for_personal_data" id="updatePersonalDataForm" method="POST" action="{% url 'education_platform:update_personal_data' %}">
+                    {% csrf_token %}
+                    <div class="row firstname_input mt-3 w-75">
+                        <label class="ps-0" for="firstNameInput">Имя</label>
+                        <input class="form-control text-muted" 
+                        type="text" 
+                        name="first_name" 
+                        id="firstNameInput" 
+                        value="{{ student.user.first_name }}" 
+                        required
+                        {% if student.edit_limit < 1 %}
+                        disabled
+                        {% endif %}
+                        >
+                    </div>
+                    
+                    <div class="row lastname_input mt-3 w-75">
+                        <label class="ps-0" for="lastNameInput">Фамилия</label>
+                        <input class="form-control text-muted" 
+                        type="text" 
+                        name="last_name" 
+                        id="lastNameInput" 
+                        value="{{ student.user.last_name }}" 
+                        required
+                        {% if student.edit_limit < 1 %}
+                        disabled
+                        {% endif %}
+                        >
+                    </div>
+                    
+                    <div class="row email_input mt-3 w-75">
+                        <label class="ps-0" for="emailInput">email</label>
+                        <input class="form-control text-muted" 
+                        type="email" 
+                        name="email" 
+                        id="emailInput" 
+                        value="{{ student.user.email }}" 
+                        required
+                        {% if student.edit_limit < 1 %}
+                        disabled
+                        {% endif %}
+                        >
+                    </div>
+
+                    <div class="row updatePersonalDataButton-wrapper mt-3 w-75">
+                        {% if student.edit_limit > 0 %}
+                        <button type="submit" class="btn btn-success w-50" id="updatePersonalDataButton">Сохранить</button>
+                        {% else %}
+                        <button type="submit" class="btn btn-success w-50 disabled" id="updatePersonalDataButton">Сохранить</button>
+                        {% endif %}
+                    </div>
+
+                    <div class="row updateErrorPlace d-none mt-3 w-75">
+                    </div>
+                </form>
+
+
+
+                
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block extrascripts %}
+<script src="{% static 'education_platform/js/personal_account_script.js' %}"></script>
+{% endblock %}

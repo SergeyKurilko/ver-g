@@ -1,0 +1,131 @@
+{% load static %}
+{% load comments_filters %}
+
+<div class="container mt-3">
+
+    <h4 class="mt-4" style="font-weight: 600;">
+        <span itemprop="commentCount">{{ article.comments.count }}</span> {{ article.comments.count|pluralize_comments }}</h4>
+
+    <!--Кнопка для вызова коллапса для добавления нового комментария-->
+    <button
+    id="addNewCommentCollapseButton"
+    class="btn addNewCommentCollapseButtonClass"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#addNewCommentCollapse"
+    aria-expanded="false"
+    aria-controls="collapseExample">
+    Оставить комментарий
+
+    </button>
+    <!--Конец кнопки для вызова коллапса для добавления нового комментария-->
+
+    <!--Подключение шаблона с коллапсом, содержащим форму добавления нового комментария-->
+    {% include 'comments/_incl/collapse_for_new_comment_for_article.html' %}
+
+
+    <!--Все комментарии-->
+    <div class="container mt-3"
+         style="background-color: white; padding: 0 0 1rem 0 !important; border-radius: 10px"
+         id="allCommentsContainer">
+
+
+    {% if not article.comments.all.exists %}
+
+        <div class="container mt-3" id="OneCommentContainer">
+        <div id="noCommentsForArticle" class="mb-4">У статьи пока нет комментариев.</div>
+        </div>
+
+    {% else %}
+
+
+    <!--Перебор последних трех комментариев-->
+    {% for comment in first_three_comments %}
+
+        <div class="container mt-3" id="OneCommentContainer{{ comment.pk }}">
+            <div class="mt-3">
+                <span style="font-weight: 600;">{{ comment.author }}</span> | <span style="font-size: 0.8em;">{{ comment.published|date:"d.m.Y, H:i" }}</span>
+                <p style="margin-bottom: 0 !important" itemprop="comment">
+                    {{ comment.text }}
+                </p>
+
+
+                <a href="#"
+                   class="buttonForAnswer"
+                   id="buttonForAnswer{{ comment.pk}}"
+                   data-bs-toggle="collapse"
+                   data-bs-target="#addAnswerCollapse{{ comment.pk }}">
+                    Ответить</a>&nbsp&nbsp
+
+                    {% include 'comments/_incl/collapse_for_answer.html' %}
+
+                {% if comment.answers.all.exists %}
+                    <a href=""
+                    class="answersForCommentButton"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#answersForComment{{ comment.pk }}">
+                        ответы ({{ comment.answers.all.count }})
+                    </a>
+                    <!--Коллапс для списка answers к этому comment-->
+                    {% include 'comments/_incl/collapse_for_answers_list.html' %}
+                {% endif %}
+
+            </div>
+
+        </div>
+    {% endfor %}
+
+
+    <!--Конец контейнера со всеми родительскими комментариями-->
+
+    </div>
+
+    <!--Добавим скрипт для сохранения переменной из контекста шаблона, чтобы использовать в скрипте-->
+    <script>
+        var requestPath = '{{ request.path }}'
+    </script>
+
+    <!--Кнопка для подгрузки дополнительных комментов-->
+    <div class="container mt-3" id="load-more-comments-container">
+    <a class="mt-2" id="load-more-comments" data-offset="3" href="">Еще комментарии</a>
+    </div>
+
+    {% endif %}
+
+    <!--    Alert Modal-->
+    <div class="modal fade" id="commentsAlertModal" tabindex="-1" aria-labelledby="commentsAlertModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="background-color: #F8D7DA !important; border: 0 !important">
+          <div class="modal-body alert alert-danger" >
+              <div>
+                  <span id="textForAlertsModal">Text</span>
+
+              </div>
+          </div>
+          <div class="modal-footer pt-0">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin: 0 auto">
+                Закрыть
+            </button>
+          </div>
+      </div>
+    </div>
+    </div>
+    <!--   End Alert Modal-->
+
+   <!--toast-->
+    <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 11">
+      <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <img src="{% static 'blog/image/logo_vertograd.ico' %}" class="rounded me-2" width="30px">
+          <strong class="me-auto">ver-g.ru</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" style="background-color: #ADB59D; font-weight: 600">
+          Сообщение успешно отправлено
+        </div>
+      </div>
+    </div>
+    <!--End toast-->
+
+
+</div>

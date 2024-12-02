@@ -1,0 +1,26 @@
+
+
+    <div class="promo-banners-in-dashboard container">
+        {% for promo_banner in promo_banners %}
+            <div class="promo-banner-wrapper mt-3 p-1">
+                <div class="row promo_image_row">
+                    <div class="col-12 promo_image_col mb-2">
+                        <img src="{{ promo_banner.image.url }}" alt="">
+                    </div>
+                </div>
+
+                <div class="row promo_text_row">
+                    <div class="col-12 promo_text_col text-center">
+                        <a href="{{ promo_banner.link }}">
+                            {{ promo_banner.text }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="promo_mark text-end">
+                    Реклама
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+

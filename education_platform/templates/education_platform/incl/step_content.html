@@ -1,0 +1,29 @@
+
+
+<div class="container">
+    <h5>{{ progress.current_block.number }}.{{ progress.current_point.steps.all.first.number|floatformat:"0" }} {{ progress.current_point.steps.all.first.title }}</h5>
+
+    <div class="step_main_content">
+        Тут основной контент из шага № {{ progress.current_step.number }} {{ progress.current_step.title }}
+
+        <div class="step_text">
+            {{ progress.current_step.text|safe }}
+        </div>
+        <div class="step_video">
+            {% if progress.current_step.video_url %}
+            Тут будет видео из внешнего источника
+            {% endif %}
+
+            {% if progress.current_step.video %}
+            Тут будет видео из локального источника
+            {% endif %}
+        </div>
+
+        <div class="step_test">
+
+        </div>
+
+        <button class="btn btn-success d-inline-flex course_continue mt-2">Следующий шаг</button>
+
+    </div>
+</div>

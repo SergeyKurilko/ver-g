@@ -1,0 +1,11 @@
+<div class="collapse" id="answersForComment{{ comment.pk }}">
+    {% for answer in comment.answers.all %}
+
+    <div class="mt-3 answer_item">
+    <span style="font-weight: 600;">{{ answer.author }}</span> | <span style="font-size: 0.8em;">{{ answer.published|date:"d.m.Y, H:i" }}</span>
+    <p style="margin-bottom: 0 !important">
+    {{ answer.text }}
+    </p>
+    </div>
+    {% endfor %}
+</div>

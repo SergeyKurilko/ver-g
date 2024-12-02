@@ -1,0 +1,34 @@
+{% load static %}
+<!-- Modal -->
+<div class="modal fade" id="courseCompleteModal" tabindex="-1" aria-labelledby="courseCompleteModal" aria-hidden="true">
+  <div class="modal-dialog course-complete-modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: none">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row course-complete-title justify-content-center">
+          <div class="col-md-6"></div>
+          <div class="col-12 col-md-6 text-center">ПОЗДРАВЛЯЕМ!</div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-6 d-none d-md-block">
+            <img src="{% static 'education_platform/images/course_complete_flowers.png' %}" alt="">
+          </div>
+          <div class="col-md-6 col-12">
+            <div class="row course-completed-image-logo justify-content-center mt-3"><img src="{% static 'education_platform/images/course_complete_logo.png' %}" alt=""></div>
+            <div class="row">
+              <span class="course-completed-bottom-text mt-4">
+                Вы изучили курс и прошли все задания!
+                Теперь вы можете получить сертификат, пройдя по  <b><a href="{% url 'education_platform:get_certificate' progress_pk %}">ссылке.</a></b>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,39 @@
+.module.aligned {
+    border: 1px solid green;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 1rem;
+}
+
+.djn-dynamic-form-education_platform-trainingcourseblock {
+    border: 1px solid green;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 7rem;
+}
+
+#header {
+    background-color: rgba(255, 255, 255, 0.90);
+    color: #5B6B3A;
+}
+
+#header a {
+    color: #5B6B3A !important;
+}
+
+#logout-form button {
+    color: #5B6B3A !important;
+}
+
+.breadcrumbs {
+    background-color: #5B6B3A !important;
+}
+
+.module table caption {
+    background-color: #5B6B3A !important;
+}
+
+.inline-heading {
+    background-color: #5B6B3A !important;
+    margin-bottom: 0.5rem !important;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    {% block ya_metrik %}
+        <!-- Yandex.Metrika counter -->
+        <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(99027138, "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true
+        });
+        </script>
+        <noscript><div><img src="https://mc.yandex.ru/watch/99027138" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        <!-- /Yandex.Metrika counter -->
+    {% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block meta_description %}
+    <meta name="description" content="">
+    {% endblock %}
+    <link rel="shortcut icon" href="{% static 'education_platform/common_icons/ver-g_academ_logo.svg' %}" type="image/x-icon">
+    <link rel="canonical" href="https://ver-g.ru/academy/">
+
+    {% block pre_head %}
+    {% endblock %}
+    
+
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'education_platform/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'education_platform/css/education_platform_style.css' %}">
+    <link rel="stylesheet" href="{% static 'education_platform/stonehenge/stonehenge.css' %}">
+    <script src="{% static 'blog/js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'blog/js/bootstrap.bundle.min.js' %}"></script>
+
+
+
+    {% block head %}
+    {% endblock %}
+
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+
+
+    <div class="wrapper">
+    {% include 'education_platform/incl/navbar.html' %}
+
+    {% block content %}
+    {% endblock %}
+
+
+    
+    </div>
+    {% block footer %}
+    {% include 'education_platform/incl/footer.html' %}
+    {% endblock %}
+    
+
+    
+<script src="{% static 'education_platform/js/navbar-script.js' %}"></script>
+{% block extrascripts %}
+{% endblock %}
+</body>
+</html>

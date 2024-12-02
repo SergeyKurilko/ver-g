@@ -1,0 +1,20 @@
+<div class="form-for-answer_for_answer_wrapper form-for-answer_for_answer_wrapper__hide ms-0 ms-md-3"
+     id="{{ answer.pk }}">
+  <form class="form_for_answer_comment mt-4"
+        action="{% url 'education_platform:ajax_add_answer_for_comment' answer.parent.pk %}"
+        method="post"
+        id="{{ comment.pk }}"
+        author="{{ answer.author.first_name }} {{ answer.author.last_name }}"
+  >
+    {% csrf_token %} <span class="d-none">Тут токен</span>
+    <div id="editor-{{ answer.pk }}"></div>
+    <input type="hidden" name="comment_text" class="form-control">
+
+    <button id="{{ answer.pk }}" class="btn btn-success mt-3 send_answer_answer_for_comment_button"
+            disabled="true"
+            type="submit">
+      Отправить
+    </button>
+    <button class="btn btn-light mt-3 mb-3 answer_for_comment_cancel_button-{{ answer.pk }}">Отменить</button>
+  </form>
+</div>

@@ -1,0 +1,141 @@
+{% extends 'education_platform/education_platform_base.html' %}
+{% load static %}
+{% load education_platform_filters %}
+
+
+{% block content %}
+
+
+
+<script>
+    var next_step_ajax_url = `{{ next_step_ajax_url }}`
+    var has_question = `{{ has_question }}`
+    var has_many_correct_answers = `{{ has_many_correct_answers }}`
+</script>
+
+<div class="overlay" id="overlay"></div>
+<div class="blinking_text_and_logo_loader d-none">
+<div class="blinking-text-for-logo"><h3>Загрузка</h3></div>
+<img id="logoLoaderInStep" src="{% static 'education_platform/images/logo_vertograd.svg' %}" class="">
+</div>
+
+
+<div class="step_content_wrapper">
+
+    <div class="a-side_total_steps_wrapper">
+        <div class="a-side_total_steps_open_button">
+            <div>
+                <span>Содержание</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                </svg>
+
+            </div>
+        </div>
+
+        <div class="a-side_total_steps_content_wrapper">
+
+            <div class="a-side_total_steps_content_main">
+
+                <div class="a-side_total_steps_content_pin-button">
+                    <span>Закрепить</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
+                        <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
+                    </svg>
+                </div>
+
+                {% for block in training_course.blocks.all %}
+                <div><h6>{{ block.number }}. {{ block.title }}</h6></div>
+                    <ul>
+                       {% for point in block.points.all %}
+                        {% if point in progress.completed_points.all %}
+                        <li>
+                            <a href="">
+                                {{ block.number }}.{{ point.number|floatformat:"0" }} {{ point.title }}
+                            </a>
+                        </li>
+                        {% else %}
+                        <li>
+                            {{ block.number }}.{{ point.number|floatformat:"0" }} {{ point.title }}
+                        </li>
+                        {% endif %}
+                       {% endfor %}
+
+                    </ul>
+
+
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="container step_content">
+        <div class="point_title_and_number pt-2 ps-5">
+            <h4>{{ progress.current_block.number }}.{{ progress.current_point.number|floatformat:"0" }} {{ progress.current_point.title }}</h4>
+            <div class="point_title_and_number_sep_line"></div>
+        </div>
+
+        <div class="step_main_content pt-2 ps-5 pe-5 pb-5">
+
+
+            <div class="step_title">
+                {{ progress.current_step.title }}
+            </div>
+            <span style="color: #999;">
+            Шаг {{ progress.current_step.number|floatformat:"0" }} из {{ progress.current_point.steps.count }}
+            </span>
+
+            <div class="step_text">
+                {{ progress.current_step.text|safe }}
+            </div>
+
+            <div class="step_video">
+                {% if progress.current_step.video_url %}
+                <iframe width="480" height="270" src="{{ progress.current_step.video_url }}" allow="autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture; encrypted-media" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                {% endif %}
+
+                {% if progress.current_step.video %}
+                <video src="{{ progress.current_step.video.url }}"></video>
+                {% endif %}
+            </div>
+
+
+            {% if progress.current_step.questions.count > 0 %}
+            <div class="step_test">
+                {% with question=progress.current_step.questions.first %}
+                <p>Вопрос: {{ question.text|safe }}</p>
+
+                Ответы:
+                <form id="formForQuestion" question-pk="{{question.pk}}" action="" method="POST">
+                        {% csrf_token %}
+                        {% for answer in question.answers.all %}
+                            <div class="">
+                                <input class="form-check-input" type="checkbox" id="answer_{{ answer.pk }}" value="{{ answer.pk }}" name="answer"> {{ answer.text }}
+                            </div>
+                        {% endfor %}
+                        <button id="sendAnswerButton" class="btn btn-success" type="submit" disabled>Отправить</button>
+                </form>
+                {% endwith %}
+
+            </div>
+            {% endif %}
+
+            <button current-step="{{ progress.current_step.pk }}" class="btn btn-success d-inline-flex course_continue mt-2" id="nextStep">Следующий шаг</button>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block extrascripts %}
+<script src="https://unpkg.com/htmx.org@1.9.4"></script>
+<script src="{% static 'education_platform/js/step_update.js' %}"></script>
+
+{% endblock%}

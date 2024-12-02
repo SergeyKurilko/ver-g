@@ -1,0 +1,349 @@
+{% extends 'education_platform/education_platform_base.html' %}
+{% load static %}
+{% load education_platform_filters %}
+
+{% block head %}
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ course.get_absolute_url }}" />
+<meta property="og:title" content="{{ course.title }}" />
+<meta property="og:description" content="{{ course.description|striptags|truncatewords:20 }}" />
+<meta property="og:image" content="{{ course.image.url }}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="Вертоград Академия" />
+{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="{{ course.meta_description }}">
+{% endblock %}
+
+{% block title %}{{ course.title }} - VER-G ACADEMY{% endblock %}
+
+{% block content %}
+{% include 'education_platform/incl/left_menu_offcanvas.html' %}
+{% include 'education_platform/incl/not_authenticated_modal.html' %}
+
+<!---->
+{% if not request.user.is_authenticated %}
+
+{% include 'education_platform/incl/login_form.html' %}
+{% include 'education_platform/incl/register_form.html' %}
+{% include 'education_platform/incl/reset_password_form.html' %}
+
+{% endif %}
+<!---->
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "name": "{{ course.title }}",
+  "description": "{{ course.description|striptags|safe|truncatewords:20 }}",
+  "provider": {
+    "@type": "Organization",
+    "name": "Вертоград Академия",
+    "url": "https://ver-g.ru/academy/"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "category": "Paid",
+      "priceCurrency": "RUB",
+      "price": "{{ course.price|floatformat }}"
+    }
+  ],
+  "timeRequired": "PT{{ course.time_to_study }}H",
+  "url": "{{ course.get_absolute_url }}"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "name" : "Вертоград Академия",
+  "url" : "https://ver-g.ru/academy/",
+  "logo": "{% static 'education_platform/common_icons/ver-g_academ_logo.svg' %}",
+  "contactPoint": [
+    {
+        "@type": "ContactPoint",
+        "telephone": "+7-991-737-07-40",
+        "contactType": "customer service",
+        "areaServed": "RU"
+    }
+  ]
+}
+</script>
+
+{% if not course.published and not request.user.is_superuser %}
+<section class="course-promo__main m-auto">
+    <div class="page-fragment d-flex flex-column container-fluid container-md">
+        <div class="course-promo__main-content ">
+            <h3>Курс "{{ course.title }}" снят с публикации и пока недоступен.</h3>
+        </div>
+        <div class="unpublished-get-all-course-button px-2 px-md-0 w-100">
+            <a class="" href="{% url 'education_platform:get_all_courses' %}"><h5 class="mb-0 py-2">Посмотреть все курсы</h5></a>
+        </div>
+    </div>
+</section>
+
+{% else %}
+
+<section class="course-detail-head">
+    <div class="container-md container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-10">
+                <h1>{{ course.title }}</h1>
+                <div class="" style="font-weight: 500;">
+                    {{ course.description|safe }}
+                </div>
+            </div>
+            <div class="col-2 d-none d-md-flex flex-column">
+                <img class="course-promo__course-cover" src="{{ course.image.url }}" alt="Course cover"
+                    data-media-query="desktop">
+            </div>
+        </div>
+        <div class="row">
+            <div class="course-promo__head-widgets">
+                <div class="course-promo__head-widget" data-type="difficulty">
+                    <img src="{% static 'education_platform/common_icons/difficulty_values_icons/'%}{{ difficulty_level }}.svg"
+                        alt="" width="30px">
+                    <div class="ms-2">{{ course.get_difficulty_display|slice:"0:-8" }} <br>
+                        {{course.get_difficulty_display|slice:"-8:" }}</div>
+                </div>
+
+                <div class="course-promo__head-widget" data-type="certificate">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor"
+                        class="bi bi-clock" viewBox="0 0 16 16">
+                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
+                    </svg>
+                    <div class="ms-2">{{ course.time_to_study }}ч.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="course-promo__main">
+    <div class="page-fragment d-flex container-fluid container-md">
+        <div class="course-promo__main-content ">
+
+            {% if course.what_will_you_learn_items.all.count > 0 %}
+            <div class="course-promo__content-block container-fluid container-md mt-1">
+                <h2 style="font-weight: 400;">Что вы узнаете</h2>
+                <ul class="list-style__check-marks">
+                    {% for what_will_you_learn_item in course.what_will_you_learn_items.all %}
+                    <li style="list-style-type: none" class="mt-2">
+                        <span style="position: absolute; margin: 0px 0px 0px -20px">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="#0056AD" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                            <circle cx="8" cy="8" r="8"/>
+                            </svg>
+                        </span>
+                        {{ what_will_you_learn_item.item_title }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if course.full_description|length > 0 %}
+
+            <div class="container-md container-fluid mt-5 ps-0">
+                <div class="">
+
+                    <h2 style="font-weight: 400;">Описание курса</h2>
+                    <p>
+                        {{ course.full_description|safe }}
+                    </p>
+                </div>
+
+            </div>
+            {% endif %}
+
+            {% if course.who_is_this_course_for|length > 0 %}
+            <div class="course-promo__content-block container-fluid container-md mt-5">
+                <h2 style="font-weight: 400;">Для кого мы создали этот курс</h2>
+                <p>
+                    {{ course.who_is_this_course_for|safe }}
+                </p>
+            </div>
+            {% endif %}
+
+            {% if course.about_author|length > 0 %}
+            <div class="course-promo__content-block container-fluid container-md mt-5">
+                <h2 style="font-weight: 400;">Об авторе</h2>
+                <p>
+                    {{ course.author }}
+                </p>
+                <p>
+                    {{ course.about_author| safe }}
+                </p>
+            </div>
+            {% endif %}
+
+            <div id="CourseBlocks" class="course-total-blocks container-fluid container-md mt-5 ps-0">
+
+                <div class="blocks-for-course__container">
+
+                    <h2 style="font-weight: 400;">Тематический план</h2>
+                    {% for course_block in course.blocks.all %}
+
+                    <div id="courseBlock{{ course_block.pk }}" class="mt-4 d-flex justify-content-between">
+                        <h5 style="font-weight: 400;">{{ course_block.title }}</h5>
+                        <a id="showHiddenLessonsButtonForBlock{{ course_block.pk }}" class="mb-3 show-hidden-lessons"
+                            href=""><img src="{% static 'education_platform/common_icons/chevron-compact-up.svg' %}"
+                                alt=""></a>
+                    </div>
+
+                    <div id="lessonsForBlock{{ course_block.id }}" class="">
+                        {% for point in course_block.points.all %}
+
+                        <p>{{ forloop.counter}}. {{ point.title }}</p>
+
+                        {% endfor %}
+                    </div>
+                    <hr style="margin: 0;">
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- /course-total-blocks -->
+
+            <div class="course-promo__content-block share-links container-fluid container-md mt-3">
+                <h2 style="font-weight: 400;">Поделиться курсом</h2>
+                <script src="https://yastatic.net/share2/share.js"></script>
+                <div class="ya-share2" data-curtain data-shape="normal"
+                    data-curtain 
+                    data-size="l"
+                    data-copy="extraItem"
+                    data-description='Курс "{{ course.title }}"" от VER-G Academy.' 
+                    data-services="vkontakte,odnoklassniki,telegram,whatsapp"
+                    data-image="{{ course.image.url }}"
+                    data-url="{{ course.get_absolute_url }}">
+                </div>
+            </div>
+            <!-- /share-links -->
+
+            <div class="get-course-large-block d-none d-md-block container mt-5 ps-0">
+                {% if course.price > 0 %}
+                    {% if course.discount > 0 %}
+                    <div class="d-flex flex-row align-items-end">
+                        <h2 class="mb-0" >{{ course.price|calculate_discounted_price:course.discount|floatformat:"g" }} ₽</h2>
+                        <span class="price-without-discount ms-2">{{ course.price|floatformat:"g" }} ₽</span>
+                    </div>
+                    {% else %}
+                    <h2>{{ course.price|floatformat:"g" }}&nbsp;<span
+                        style="font-size: .85em; font-weight: lighter;">₽</span></h2>
+                    {% endif %}
+                <button id="getCourseBottomButton{{course.pk}}"
+                    class="get_course_button_desktop d-inline-flex get_course_button w-50">Купить</button>
+                {% else %}
+                <h2 style="font-weight: 400;">Бесплатно</h2>
+                <button id="getCourseBottomButton{{course.pk}}"
+                    class="get_course_button_desktop d-inline-flex get_course_button w-50">Пройти
+                    курс</button>
+                {% endif %}
+            </div>
+            <!-- /get-course-large-block -->
+        </div>
+
+        <div class="course-promo__main-aside d-none d-md-block">
+            <div class="course-promo__aside-sticky-wrapper">
+
+                <div class="course-promo__enrollment_aside">
+                    {% if course.price > 0 %}
+                        {% if course.discount > 0 %}
+                        <h2 class="mb-0" >{{ course.price|calculate_discounted_price:course.discount|floatformat:"g" }} ₽</h2>
+                        <span class="price-without-discount">{{ course.price|floatformat:"g" }} ₽</span>
+                        {% else %}
+                        <h2>{{ course.price|floatformat:"g" }}&nbsp;<span
+                            style="font-size: .85em; font-weight: lighter;">₽</span></h2>
+                        {% endif %}
+                    <button id="getCourseAsideButton{{course.pk}}"
+                        class="btn btn-success get_course_button_desktop d-inline-flex get_course_button">Купить</button>
+                    {% else %}
+                    <h2 style="font-weight: 400;">Бесплатно</h2>
+                    <button id="getCourseAsideButton{{course.pk}}"
+                        class="btn btn-success get_course_button_desktop d-inline-flex get_course_button">Пройти
+                        курс</button>
+                    {% endif %}
+                </div>
+
+                <div class="course-promo__course_counters-aside mt-1">
+                    <h4>
+                        В курс входят
+                    </h4>
+                    <ul>
+                        <!---->
+                        <li>
+                            <b>{{ course.get_blocks_quantity.0 }}</b>&nbsp;{{ course.get_blocks_quantity.1 }}
+                        </li>
+
+                        <li>
+                            <b>{{ course.get_points_quantity.0 }}</b>&nbsp;{{ course.get_points_quantity.1 }}
+                        </li>
+
+                        <li>
+                            <b>{{ course.get_questions_quantity.0 }}</b>&nbsp;{{ course.get_questions_quantity.1 }}
+                        </li>
+
+                        <!---->
+                    </ul>
+
+                    <a style="text-decoration: underline;" href="#CourseBlocks">
+                        Тематический план
+                    </a>
+
+                    <div class="course-promo-includes__update-date">
+                        Последнее обновление {{ course.updated|date:"d.m.Y" }}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+
+
+<section class="get-course-section d-md-none">
+    <div class="course-get-course-block container-fluid container-md mt-2">
+        {% if course.price > 0 %}
+            {% if course.discount > 0 %}
+            <h3 class="mb-0" >{{ course.price|calculate_discounted_price:course.discount|floatformat:"g" }} ₽</h3>
+            <span class="price-course-h-card-without-discount">{{ course.price|floatformat:"g" }} ₽</span>
+            {% else %}
+            <h3>{{ course.price|floatformat:"g" }}&nbsp;<span style="font-size: .85em; font-weight: lighter;">₽</span></h3>
+            {% endif %}
+        <button id="getCourseBottomButton{{course.pk}}"
+            class="get_course_button_desktop-bottom d-inline-flex get_course_button">Купить</button>
+        {% else %}
+        <h2 style="font-weight: 400;">Бесплатно</h2>
+        <button id="getCourseBottomButton{{course.pk}}"
+            class="get_course_button_desktop-bottom d-inline-flex get_course_button">Пройти
+            курс</button>
+        {% endif %}
+    </div>
+</section>
+
+<div class="get-paid-course-modal-place"></div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block extrascripts %}
+{% if not request.user.is_authenticated %}
+<script src="{% static 'education_platform/js/auth_scripts.js' %}"></script>
+<script src="{% static 'education_platform/js/password_reset_script.js' %}"></script>
+{% endif %}
+<script src="{% static 'education_platform/js/course_detail_script.js' %}"></script>
+<script>
+    var UpArrow = `<img src="{% static 'education_platform/common_icons/chevron-compact-up.svg' %}" alt="">`
+    var DownArrow = `<img src="{% static 'education_platform/common_icons/chevron-compact-down.svg' %}" alt="">`
+    var CourseId = `{{ course.pk }}`
+    var GetCourseUrl = `{% url 'education_platform:get_course' course.pk %}`
+</script>
+{% endblock %}

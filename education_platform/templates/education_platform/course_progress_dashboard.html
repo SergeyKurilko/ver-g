@@ -1,0 +1,190 @@
+{% extends 'education_platform/education_platform_base.html' %}
+{% load static %}
+{% load education_platform_filters %}
+
+{% block ya_metrik %}
+{% endblock %}
+
+{% block title %}{{ course_progress.training_course.title }} - VER-G ACADEMY{% endblock %}
+
+{% block content %}
+
+
+<section class="main_content_course_progress_dashboard d-flex flex-row mt-2 container-md container-fluid">
+    <div class="course_progress_dashboard-left_menu d-none d-md-block">
+        <div class="course_progress_dashboard-left_menu-sticky_wrapper d-flex flex-column align-items-center">
+            <div class="container course_image">
+                <img src="{{ course_progress.training_course.image.url }}" alt="">
+            </div>
+            <div class="container mt-2 mb-1">
+                <h4>{{ course_progress.training_course.title }}</h4>
+            </div>
+            <div class="container course_progress_bar">
+                <div class="progress" style="height: 6px;">
+                    <div class="progress-bar course-progress" role="progressbar" style="width: {{ completed_course_in_percent|floatformat:"0" }}%; height: 6px;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+            <div class="container course_completed_points">
+                <p>{{completed_course_in_percent|floatformat:"0"}}% курса пройдено</p>
+            </div>
+
+            <div class="container course-is-completed-container">
+                <span>
+                    {% if completed_course_in_percent < 1 %}
+                    <a href="{{ course_progress.current_step.get_absolute_url }}" class="btn btn-success d-inline-flex course_continue w-100 justify-content-center mt-2">Начать курс</a>
+                    {% elif completed_course_in_percent > 1 and completed_course_in_percent < 100 %}
+                    <a href="{{ course_progress.current_step.get_absolute_url }}" class="btn btn-success d-inline-flex course_continue w-100 justify-content-center mt-2">Продолжить курс</a>
+                    {% elif completed_course_in_percent == 100 %}
+                    <div class="" style="font-weight: 500;">Курс завершен</div>
+                    <a href="{% url 'education_platform:get_certificate' course_progress.pk %}" class="p-2 d-inline-flex course_continue mt-2 w-100 justify-content-center">
+                        <span class="me-2 d-flex align-items-center">Сертификат</span>
+                        <img src="{% static 'education_platform/images/certificate_images/cerificate-small-sceleton.png' %}" alt="Сертификат" width="50px">
+                    </a>
+                    {% endif %}
+                </span>
+            </div>
+
+            <!-- promo banners -->
+            {% include 'education_platform/incl/promo_in_dashboard.html' %}
+            <!-- / promo banners -->
+        
+        </div>
+    </div>
+
+    <div class="course_progress_dashboard-main_column">
+        <h3 class="d-md-none d-block ms-3">{{ course_progress.training_course.title }}</h3>
+
+        <h3 class="ms-3 d-none d-md-block" style="font-weight: 400; font-size: calc(1rem + 1.5vw)">Тематический план</h3>
+
+        {% for block_data in blocks_data %}
+
+        <div class="course_blocks_and_points__section container-md container-fluid mt-2">
+            <div class="course_blocks_and_points__section-block__wrapper d-flex p-3">
+                <div class="block_progress_bar_for_block">
+                    <div class="progress-bar_vertical">
+                            &nbsp;
+                    </div>
+                    <div class="progress-bar_vertical-green" style="min-height: {{ block_data.completed_steps_in_points_in_block_in_percent|floatformat:"0" }}% !important;
+                    {% if block_data.completed_steps_in_points_in_block_in_percent < 100 %}border-radius: 0 0 0 5px !important;{% endif %}">
+                            &nbsp;
+                    </div>
+                </div>
+                <div class="block_title_and_status__wrapper">
+                    <div class="block-title"><h5 class="mb-0">{{ block_data.block.number }}. {{ block_data.block.title }}</h5></div>
+                    <div title="Пройдено шагов блока" class="block_progress_status">{{ block_data.completed_steps_in_points_in_block }}/{{ block_data.total_steps_in_points_in_block }}</div>
+                </div>
+            </div>
+
+
+            <div class="course_blocks_and_points__section-points__wrapper d-flex flex-column">
+                {% for point_data in block_data.points_data %}
+
+
+                <div class=" {% if forloop.last %}course_blocks_and_points__section-one_point-wrapper-last{% else %}course_blocks_and_points__section-one_point-wrapper{% endif %} d-flex ms-4 p-3">
+                    <div class="progress_bar_for_point d-flex flex-column">
+                        <div class="progress-bar_vertical">
+                            &nbsp;
+                        </div>
+                        <div class="{% if forloop.last %}progress-bar_vertical-green-last-point{% else %}progress-bar_vertical-green{% endif %}" style="min-height: {{ point_data.completed_steps_in_point_in_percent|floatformat:"0" }}% !important;">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="point_title_and_widgets__wrapper d-flex flex-column flex-md-row">
+                        <div class="point_title">
+
+                                <a href="{{ point_data.point.steps.all.first.get_absolute_url }}">{{ point_data.point.number|float_with_dot:"1" }} {{ point_data.point.title }}
+                                {% if point_data.point in course_progress.completed_points.all %}
+                                    <span style="content: url('{% static 'education_platform/common_icons/list-check-mark.svg' %}');
+                                    width: 23px; position: absolute;">
+                                </span>
+                                {% endif %}
+                                </a>
+
+                        </div>
+
+
+                        <div class="steps_progress__widgets">
+                            <span class="me-1" title="Среднее время изучения" style="color: #54ad54; font-size: 12px">&nbsp;≈ {{ point_data.point.time_to_study }} мин</span>
+                            <span title="Пройдено шагов урока" class="steps_progress_status" style="color: #54ad54; font-size: 12px">
+                            шаги: {{ point_data.completed_steps_in_point }}/{{ point_data.total_steps_in_point }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+        </div>
+
+        {% if forloop.counter == 1 %}
+            <div class="d-md-none promo-in-course-dashboard-mini d-flex mt-2 align-items-center">
+                <div class="promo-in-course-dashboard-mini-image ps-1">
+                    <img src="{{ promo_banners.first.image.url }}" alt="">
+                </div>
+                <div class="promo-in-course-dashboard-mini-text">
+                    <div class="text-center">
+                        <a href="{{ promo_banners.first.link }}">{{ promo_banners.first.text }}</a>
+                    </div>
+                    <div class="promo_mark text-end pe-1">
+                        Реклама
+                    </div>
+                </div>
+            </div>
+        {% elif forloop.counter == 2 %}
+        <div class="d-md-none promo-in-course-dashboard-mini d-flex mt-2 align-items-center">
+            <div class="promo-in-course-dashboard-mini-image ps-1">
+                <img src="{{ promo_banners.last.image.url }}" alt="">
+            </div>
+            <div class="promo-in-course-dashboard-mini-text">
+                <div class="text-center">
+                    <a href="{{ promo_banners.last.link }}">{{ promo_banners.last.text }}</a>
+                </div>
+                <div class="promo_mark text-end pe-1">
+                    Реклама
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% endfor %}
+
+    </div>
+</section>
+
+
+<section class="d-md-none continue-course-small-bottom">
+    <div class="continue-course-small-bottom-button">
+        {% if completed_course_in_percent < 1 %}
+        <a href="{{ course_progress.current_step.get_absolute_url }}" class="p-2 d-inline-flex course_continue mt-2">Начать курс</a>
+        {% elif completed_course_in_percent > 1 and completed_course_in_percent < 100 %}
+        <a href="{{ course_progress.current_step.get_absolute_url }}" class="p-2 d-inline-flex course_continue mt-2">Продолжить курс</a>
+        {% elif completed_course_in_percent == 100 %}
+        <div class="">Курс завершен</div>
+        <a href="{% url 'education_platform:get_certificate' course_progress.pk %}" class="p-2 d-inline-flex course_continue mt-2 justify-content-center w-50">
+            <span class="me-2 d-flex align-items-center">Сертификат</span>
+            <img src="{% static 'education_platform/images/certificate_images/cerificate-small-sceleton.png' %}" alt="Сертификат" width="50px">
+        </a>
+        {% endif %}
+
+        
+        <div class="course_progress_bar w-50 mt-3">
+            <div class="progress" style="height: 6px;">
+                <div class="progress-bar course-progress" role="progressbar" style="width: {{ completed_course_in_percent|floatformat:"0" }}%; height: 6px;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="course_completed_points">
+                <p>{{completed_course_in_percent|floatformat:"0"}}% курса пройдено</p>
+            </div>
+        </div>
+
+        
+    </div>
+</section>
+
+<script src="{% static 'education_platform/js/course_progress_dashboard.js' %}"></script>
+
+
+
+{% endblock %}

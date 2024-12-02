@@ -1,0 +1,89 @@
+{% load humanize %}
+
+<!-- Modal for get paid course-->
+<div class="modal fade" id="modalForPaidCourse" tabindex="-1" aria-labelledby="modalForPaidCourseLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body" id="modalBody">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        <form id="paidForm" action="{% url 'education_platform:create_transaction' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="product_type" value="{{ product_type }}">
+          <input type="hidden" name="product_id" value="{{ product_id }}">
+          <input type="hidden" name="amount" value="{{ amount }}">
+          <input type="hidden" name="course_title" value="{{ course_title }}">
+
+          <div class="payment-detail-container mb-4">
+            <div class="payment-detail-header me-4">
+              <h3>Оплата доступа к курсу: {{ course_title }}</h3>
+            </div>
+            <div class="payment-detail-email-row mt-4 row">
+              <div class="email col-5 col-md-3">
+                Ваш email
+              </div>
+              <div class="col-md-2 col-4 user-email"
+                title="На этот адрес придет подтверждение оплаты. Изменить его можно в настройках профиля.">
+                {{ user_email }}
+              </div>
+            </div>
+            <div class="payment-detail-amount-row row mt-2 align-items-center">
+              <div class="amount-col col-5 col-md-3">
+                Стоимость
+              </div>
+              <div class="amount-value-col col-5 col-md-5">
+                {% if discount_price %}
+                <div class="d-flex align-items-center">
+                  <span class="price-without-discount">{{ amount|floatformat:"0"|intcomma }} ₽</span>
+                  {{ discount_price|floatformat:"g" }} ₽
+
+                </div>
+
+                {% else %}
+                <span class="amount-val">{{ amount|floatformat:"0"|intcomma }}</span> <span>₽</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <button id="paidFormSuccessButton" class="px-3 py-1 w-50">Оплатить</button>
+
+        </form>
+
+        {% if not discount_price %}
+        <form action="{% url 'education_platform:use_promo_code' %}" method="post" id="usePromoCodeForm">
+          {% csrf_token %}
+          <div class="d-flex flex-row flex-nowrap mt-3">
+            <input class="me-2 d-none" type="checkbox" name="havePromoCode" id="havePromoCheck">
+            <label id="labelForhavePromoCheck" for="havePromoCheck">
+              У меня есть промокод!
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+              </svg>
+            </label>
+          </div>
+          <div class="promo-input-container">
+            <!-- <div id="promoImageLoader" class="image-loader mt-3 d-none" style="margin-left: 40%;"></div> -->
+            <input maxlength="8" class="form-control w-50 mt-1" type="text" name="promoInput" id="promoCode"
+              placeholder="Введите промокод" aria-describedby="promoCodeFeedback">
+            <div id="promoCodeFeedback" class="invalid-feedback">
+            </div>
+            <button type="submit" class="mt-2 promo-button ver-g-disabled-button w-50 px-3 py-1">Применить</button>
+          </div>
+        </form>
+        {% endif %}
+
+
+        <div class="div course-by-agreement mt-3">
+          Оплачивая доступ к этому курсу, вы соглашаетесь с условиями <a target="_blank" href="{% url 'blog:terms' %}">пользовательского соглашения.</a>
+          Если у вас возникли проблемы с оплатой, напишите нам на help@ver-g.ru
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

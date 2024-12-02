@@ -1,0 +1,144 @@
+{% extends 'education_platform/education_platform_base.html' %}
+{% load static %}
+
+{% block title %}
+{{ student_name }} успешно завершил/а курс "{{ course_name }}" на VER-G Academy.
+{% endblock %}
+
+{% block pre_head %}
+<link rel="stylesheet" href="{% static 'education_platform/owlcarousel/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'education_platform/owlcarousel/owl.theme.default.min.css' %}">
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'education_platform/css/certificate_style.css' %}">
+<meta property="og:url" content="{{ certificate_link }}">
+<meta property="og:image" content="{% url 'education_platform:serve_certificate_image' progress.pk %}">
+{% endblock %}
+
+{% block content %}
+
+<!---->
+{% if not request.user.is_authenticated %}
+
+{% include 'education_platform/incl/login_form.html' %}
+{% include 'education_platform/incl/register_form.html' %}
+{% include 'education_platform/incl/reset_password_form.html' %}
+
+{% endif %}
+<!---->
+
+<section class="get-certificate-preload-section container-md container-fluid">
+    <div class="row mb-3 download-button-row">
+        <div class="col-12 col-md-7 download-button-col">
+        <a class="download-certificate-button col-12 col-md-4" href="{% url 'education_platform:download_certificate' progress.pk %}">
+            скачать
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+        </a>
+        </div>
+    </div>
+    <div class="row get-certificate-preload-row">
+        <div class="col-12 col-md-7 certificate-preview-image d-flex flex-column align-items-center align-items-md-end mb-4 mb-md-0">
+            <div class="image-loader-place mt-5 me-auto ms-auto d-flex align-items-center">
+                <div class="image-loader-text me-3">Загрузка сертификата...</div>
+                <div class="image-loader"></div>
+            </div>
+            <img id="certificateImage" class="w-100" src="{% url 'education_platform:serve_certificate_image' progress.pk %}" alt="Certificate Preview">
+            <div class="mt-3 w-100 certificate-share d-none">
+                <div class="certificate-share-title">Поделиться:</div> 
+                <div class="ya-share2 ms-2 d-flex" 
+                data-curtain 
+                data-size="m"
+                data-copy="extraItem"
+                data-description='{{ student_name }} успешно завершил/а курс "{{ course_name }}" на VER-G Academy.' 
+                data-services="vkontakte,odnoklassniki,telegram,whatsapp"
+                data-image="{% url 'education_platform:serve_certificate_image' progress.pk %}"
+                data-url="{{ certificate_link }}">
+                </div>
+                <div class="input-group" style="flex: 3">
+                    <input class="form-control d-none d-sm-block ms-2" type="text" name="" id="" value="{{ certificate_link }}" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="col-0 col-md-1"></div>
+
+        
+            <div class="col-12 col-md-3 certificate-student-name d-flex flex-column">
+                <div class="row mx-1">
+                    
+                    <div class="certificate-student-name-course-information-card d-flex flex-column align-items-center p-2">
+                        <div class="certificate-student-name-header">
+                            Получатель
+                        </div>
+                        <div class="certificate-student-name-fullname">
+                            {{ student_name }}
+                        </div>
+                        
+                        <div class="certificate-course-logo">
+                            <img src="{{ progress.training_course.image.url }}" alt="">
+                        </div>
+                        <div class="certificate-course-name text-center mt-2 mb-2 mb-md-0">
+                            "{{ course_name }}"
+                        </div>
+                        <div class="certificate-course-widgets mt-2 mt-md-0">
+                            <span>{{ progress.training_course.completed_counter }}</span><img src="{% static 'education_platform/common_icons/person.svg' %}" alt="">
+                            <span class="ms-3 me-1">{{ progress.training_course.time_to_study }}</span><img src="{% static 'education_platform/common_icons/clock.svg' %}" alt="">
+                            <br><span>{{ progress.training_course.get_difficulty_display }} сложности.</span>
+                        </div>
+                        {% if request.user.student == progress.student %}
+                        <a class="certificate-course-footer mt-2" href="{{ progress.training_course.get_absolute_url }}">Вы записаны</a>
+                        {% else %}
+                        <a class="certificate-course-footer mt-2" href="{{ progress.training_course.get_absolute_url }}">Записаться</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row about-certificate mx-1">
+                    <div class="about-certificate-wrapper mt-2 p-2">
+                        <div class="about-certificate_title p-2">
+                            Что дает сертификат Академии Вертоград?
+                        </div>
+                        <div class="about-certificate_carusel">
+                            <div class="owl-carousel owl-theme owl-about-certificates-text">
+                                <div class="about-certificate-card p-3">
+                                    знания в сфере интерьерного озеленения
+                                </div>
+                                <div class="about-certificate-card p-3">
+                                    практика применения знаний
+                                </div>
+                                <div class="about-certificate-card p-3">
+                                    единомышленники и новый круг общения
+                                </div>
+                                <div class="about-certificate-card p-3">
+                                    востребованность на рынке труда
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+    </div>
+
+
+</section>
+<!-- /get-certificate-preload-section -->
+
+<script src="https://yastatic.net/share2/share.js"></script>
+<script src="{% static 'education_platform/js/get_certificate_script.js' %}"></script>
+
+{% endblock %}
+
+
+{% block extrascripts %}
+<script src="{% static 'education_platform/owlcarousel/owl.carousel.min.js' %}"></script>
+{% if not request.user.is_authenticated %}
+<script src="{% static 'education_platform/js/auth_scripts.js' %}"></script>
+<script src="{% static 'education_platform/js/password_reset_script.js' %}"></script>
+{% endif %}
+{% endblock %}
+
+

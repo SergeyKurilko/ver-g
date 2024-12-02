@@ -1,0 +1,60 @@
+{% extends 'education_platform/education_platform_base.html' %}
+{% load static %}
+
+
+{% block title %}
+Подтверждение оплаты
+{% endblock %}
+
+{% block content %}
+
+<section class="payment-confirm mt-1 mt-2-md">
+    <div class="container-fluid container-md text-center payment-confirmed-container d-none">
+        {% if product_type == "course" %}
+            <h2>Спасибо за подписку!</h2>
+            <h4 style="font-weight: 100; line-height: 2rem;">
+                Вы получили доступ к прохождению курса <span style="font-weight: 500;">"{{ course.title }}"</span>.
+                <br>Желаем приятной учебы.
+            </h4>
+            <div class="corse-page-from-payment-confirm w-50 p-2 p-md-3">
+                <a href="{{ course.get_absolute_url }}">Перейти к изучению курса.</a>
+            </div>
+        {% elif product_type == "course_pack" %}
+            <h2>Спасибо за подписку!</h2>
+            <h4 style="font-weight: 100; line-height: 2rem;">
+                Вы получили доступ к прохождению следующих курсов: <br>
+                {% for course in course_pack.courses.all %}
+                    <span style="font-weight: 500;">"{{ course.title }}"</span>   <br>  
+                {% endfor %}
+            </h4>
+            
+            <div class="corse-page-from-payment-confirm w-50 p-2 p-md-3">
+                <a href="{% url 'education_platform:my_courses' %}">Перейти к списку всех ваших курсов.</a>
+            </div>
+        {% endif %}  
+    </div>
+
+    <!--  -->
+    <div class="container-fluid container-md text-center payment-not-confirmed d-none">
+        <div class="">
+            <div role="status" >
+                <h4 style="font-weight: 100;">
+                    Ожидаем подтверждение оплаты.
+                </h4>
+            </div>
+            <div class="spinner-border ms-2 mb-1" aria-hidden="true"></div>
+        </div>
+    </div>
+    <!--  -->
+
+
+</section>
+
+<script>
+    var payment_confirmed = '{{ payment_confirmed }}'
+    var payment_id = '{{ payment_id }}'
+    var check_payment_url = '{{ check_payment_url }}'
+</script>
+<script src="{% static 'education_platform/js/payment_script.js'  %}"></script>
+
+{% endblock %}

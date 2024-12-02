@@ -1,0 +1,38 @@
+{% load static %}
+
+
+
+    <div class="new_cards" style="display: none">
+{% for course in filtered_courses_list %}
+
+    <div class="course-card-horizontal d-flex flex-row mb-2 mt-1 pt-3 ps-3 pe-3">
+
+        <div class="course-logo me-3">
+            <img src="{{ course.image.url }}" alt="Обложка">
+        </div>
+
+        <div class="course-main-info d-flex flex-column">
+            <div class="course-author-title-price d-flex flex-row mb-2">
+                <div class="course-h-card-title-author col-9">
+                    <a href="{{ course.get_absolute_url}}"><h3>{{ course.title }}</h3></a>
+                    <span class="course-h-card-author">{{ course.author }}</span>
+                </div>
+                <div class="course-h-card-price col-3">
+                    {% if course.is_free %}<span class="free-course-h-card">Бесплатно</span>
+                    {% else %}<span class="price-course-h-card">{{ course.price|floatformat:"0" }} ₽</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="course-description">
+                {{ course.description|safe }}
+            </div>
+            <div class="course-widgets">
+                <span>{{ course.completed_counter }}</span><img src="{% static 'education_platform/common_icons/person.svg' %}" alt="">
+                <span class="me-1">{{ course.time_to_study }}</span><img src="{% static 'education_platform/common_icons/clock.svg' %}" alt="">
+                <br><span>{{ course.get_difficulty_display }} сложности.</span>
+            </div>
+        </div>
+
+    </div>
+{% endfor %}
+    </div>

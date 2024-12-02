@@ -1,0 +1,23 @@
+{% load static %}
+
+<div class="course-card">
+    <div class="course-card-top">
+        <a href="{{ course_pack.get_absolute_url }}"><span>{{ course_pack.title }}</span></a>
+        <img src="{{ course_pack.image.url }}" alt="">
+    </div>
+    <div class="course-card-description">
+        {{ course_pack.description|truncatewords:10|safe }}
+    </div>
+    <div class="course-card-widgets">
+        <div class="course-card-widget-time" label="Время изучения">
+            <span class="me-1">{{ course_pack.total_time_to_study }}ч.</span><img src="{% static 'education_platform/common_icons/clock.svg' %}" alt="">
+            <span class="ms-2">Курсов: {{ course_pack.courses.all.count }}</span>
+        </div>
+    </div>
+    <div class="course-card-price">
+        <span class="course-not-free-price">{{ course_pack.price|floatformat:"g" }} ₽</span>
+    </div>
+    <div class="course-card-detail-button mt-2">
+        <a class="" href="{{ course_pack.get_absolute_url }}">Подробнее</a>
+    </div>
+</div>

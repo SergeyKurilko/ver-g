@@ -1,0 +1,203 @@
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.total-border-wrapper {
+    position: absolute;
+    width: 700px;
+}
+
+.certificate_border_img {
+    width: 100%;
+}
+
+.ver-g-link {
+    font-family: none;
+    position: absolute;
+    top: 25px;
+    left: 320px;
+    text-decoration: none;
+    color: black;
+}
+
+.cert_img {
+    z-index: -1;
+    position: relative;
+}
+
+.name_container {
+    top: 196px;
+    position: absolute;
+    left: 178px;
+    width: 367px;
+    text-align: center;
+    color: #004415;
+    font-style: italic;
+    font-weight: normal;
+}
+
+.course_name_container {
+    top: 241px;
+    position: absolute;
+    left: 178px;
+    width: 367px;
+    text-align: center;
+    color: #004415;
+    font-style: italic;
+    font-weight: normal;
+}
+
+.header_container_1 {
+    top: 77px;
+    position: absolute;
+    left: 220px;
+    width: 299px;
+    text-align: center;
+    color: #004415;
+    font-weight: bold;
+    font-style: normal;
+    font-size: small;
+    border-bottom: 1px solid #004415;
+    white-space: nowrap;
+}
+
+.header_container_2 {
+    top: 97px;
+    position: absolute;
+    left: 186px;
+    width: 367px;
+    text-align: center;
+    color: #004415;
+    font-weight: bold;
+    font-style: normal;
+    font-size: small;
+}
+
+.header_container_sertificate_num {
+    position: absolute;
+    top: 127px;
+    left: 170px;
+    font-size: xx-large;
+    color: #004415;
+}
+
+.body_container_1 {
+    position: absolute;
+    top: 174px;
+    font-weight: normal;
+    font-style: italic;
+    left: 176px;
+    font-size: small;
+    color: #004415;
+}
+
+.body_container_2 {
+    position: absolute;
+    top: 220px;
+    font-weight: normal;
+    font-style: italic;
+    left: 176px;
+    font-size: small;
+    color: #004415;
+}
+
+.line_1 {
+    border-bottom: 2px solid #004415;
+    position: absolute;
+    top: 217px;
+    left: 177px;
+    width: 370px;
+}
+
+.line_2 {
+    border-bottom: 2px solid #004415;
+    position: absolute;
+    top: 263px;
+    left: 177px;
+    width: 370px;
+}
+
+.signature_place {
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    top: 325px;
+    left: 141px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.signature_img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.footer-left-line {
+    border-bottom: 2px solid #004415;
+    position: absolute;
+    top: 377px;
+    left: 112px;
+    width: 139px;
+}
+
+.footer-right-line {
+    border-bottom: 2px solid #004415;
+    position: absolute;
+    top: 377px;
+    left: 453px;
+    width: 139px;
+}
+
+.creator_inform_container {
+    position: absolute;
+    top: 381px;
+    font-weight: normal;
+    font-style: italic;
+    left: 101px;
+    font-size: x-small;
+    color: #004415;
+    text-align: center;
+    width: 159px;
+}
+
+.author_course_name {
+    font-weight: normal;
+    font-style: italic;
+    font-size: small;
+    color: #004415;
+}
+
+
+.date_inform_container {
+    position: absolute;
+    top: 381px;
+    font-weight: normal;
+    font-style: italic;
+    left: 458px;
+    font-size: x-small;
+    color: #004415;
+}
+
+.date_string_container {
+    position: absolute;
+    top: 358px;
+    left: 475px;
+    color: #004415;
+    font-style: italic;
+    font-weight: normal;
+}
+
+.footer_logo_container {
+    height: 116px;
+    width: 116px;
+    position: absolute;
+    top: 329px;
+    left: 294px;
+}
+
+.footer_logo_img {
+    width: 100%;
+    height: auto;
+}
+

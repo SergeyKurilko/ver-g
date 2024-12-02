@@ -1,0 +1,17 @@
+<div class="collapse"
+     id="addNewCommentCollapse">
+
+    <div class="alert alert-success d-none" role="alert" id="successAlert">
+    </div>
+
+    <div class="alert alert-danger d-none" role="alert" id="dangerAlert">
+    </div>
+
+    <form action="{% url 'comments:add_new_comment_for_article' article.pk %}" method="post" id="addNewCommentForm" class="p-2">
+        {% csrf_token %}
+        <h5>Введите ваше имя и текст сообщения</h5>
+        <p>{{ add_comment_form.author }}</p>
+        <p>{{ add_comment_form.text }}</p>
+        <button class="btn btn-warning mt-1 orangeButtonForSendComments" type="submit">Отправить</button>
+    </form>
+</div>

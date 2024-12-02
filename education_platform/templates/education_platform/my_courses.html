@@ -1,0 +1,217 @@
+{% extends 'education_platform/education_platform_base.html' %}
+
+{% load static %}
+
+{% block ya_metrik %}
+{% endblock %}
+
+{% block title %}
+{{ course_list_title }}
+{% endblock %}
+
+
+
+
+{% block pre_head %}
+<link rel="stylesheet" href="{% static 'education_platform/owlcarousel/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'education_platform/owlcarousel/owl.theme.default.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="overlay d-none">
+    <div class="global_loader_1"></div>
+</div>
+
+<div class="container-fluid container-md avatar-container__wrapper">
+    <div class="container-fluid container-md avatar-container py-2 py-md-4">
+        <div class="row avatar-row">
+
+            <!-- -->
+            <div class="col-12 col-md-3 py-3 avatar-container-col">
+                <div class="top-avatar-container">
+                    {% if student.avatar %}
+                    <div class="row mb-2 text-center"><h4>{{ student.user.first_name }}</h4></div>
+                    <div class="row avatar-image-container justify-content-center">
+                        <span class="circle-avatar-image">
+                            <img class="avatar-img" src="{{ student.avatar.url }}" alt="">
+                        </span>
+                    </div>
+                    
+                    {% else %}
+                    <div class="row mb-2 text-center"><h4>{{ student.user.first_name }}</h4></div>
+                    <div class="row avatar-image-container justify-content-center">
+                        <span class="circle-avatar-image" style="background-color: #cccccc !important">
+                            <img class="avatar-img" src="{% static 'education_platform/common_icons/blank_avatar.svg' %}" alt="">
+                        </span>
+                    </div>
+                    
+                    {% endif %}
+
+                    <hr style="color: rgb(0 0 0 / 18%); background-color: rgb(0 0 0 / 18%);">
+
+                    <ul class="list-group avatarStatList">
+                        <li class="list-group-item list-group-item-secondary">Завершено курсов: {{ completed_courses_count }}</li>
+                        <li class="list-group-item list-group-item-secondary">Всего курсов: {{ my_courses_total_count }}</li>
+                        <a href="{% url 'education_platform:my_courses' %}" id="myCoursesDarkButton" type="button" class="btn btn-dark ">Мои курсы</a>
+                        <a href="{% url 'education_platform:my_certificates' %}" id="myCertificatesDarkButton" type="button" class="btn btn-dark ">Мои сертификаты</a>
+                    </ul>
+                </div>
+                <!-- /top-avatar-container -->
+                 <div class="bottom-avatar-container mt-4">
+                    <a class="link-to-blog-from-my-courses" href="{% url 'blog:articles_list' %}"><h5>Cтатьи о растениях</h5></a>
+
+                    <div class="owl-carousel owl-theme owl-latest-articles">
+                    {% for article in latest_articles %}
+                        <a class="article-badge art-b-{{ forloop.counter }}" href="{{ article.get_absolute_url }}" title="{{ article.title }}">{{ article.title|truncatechars:"20" }}</a>
+                    {% endfor %}
+                    </div>
+
+                    
+
+                 </div>
+            </div>
+            <!-- /avatar-container-col -->
+
+            <!--  -->
+            <div class="col-12 col-md-8 my-courses ms-md-5 mt-3 mt-md-0">
+                <h3>{{ course_list_title }}:</h3>
+                <div class="my-courses-filter mt-3 mb-2">
+                    <a id="filter-all" class="my-courses-filter-button mt-2 mt-md-0" href="?filter=all">Все мои курсы</a>
+                    <a id="filter-completed" class="my-courses-filter-button mt-2 mt-md-0" href="?filter=completed">Завершенные</a>
+                    <a id="filter-incompleted" class="my-courses-filter-button mt-2 mt-md-0" href="?filter=incompleted">Незавершенные</a>
+                </div>
+
+                {% for progress in progresses_data %}
+
+                <div class="my-courses-course-card-horizontal d-flex flex-row mb-1 mt-1 pt-3 ps-3 pe-3">
+
+                    <div class="course-logo me-3">
+                        <img src="{{ progress.course_image.url }}" alt="Обложка">
+                    </div>
+
+                    <div class="course-main-info d-flex flex-column">
+                        <div class="course-author-title-price d-flex flex-row mb-2">
+                            <div class="course-h-card-title-author">
+                                <a href="{{ progress.course_url }}"><h3>{{ progress.course_title }}</h3></a>
+                                <span class="course-h-card-author">{{ progress.course_author }}</span> 
+                            </div>
+                        </div>
+                        <div class="course-description">
+                            {{ progress.course_description|safe|truncatewords:"10" }}
+                        </div>
+                        <div class="course-widgets">
+                            <span>{{ progress.course_completed_counter }}</span><img src="{% static 'education_platform/common_icons/person.svg' %}" alt="">
+                            <span class="me-1">{{ progress.course_time_to_study }}</span><img src="{% static 'education_platform/common_icons/clock.svg' %}" alt="">
+                            <br><span>{{ progress.course_difficulty }} сложности.</span>
+                            <div class="">
+                                <div class="progress w-50 mt-3" style="height: 6px;">
+                                    <div class="progress-bar course-progress" role="progressbar" style="width: {{ progress.course_complete_in_percent|floatformat:'0' }}%; height: 6px;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="my-courses-course_completed_points mt-2">
+                                    <p>{{ progress.course_complete_in_percent|floatformat:"0" }}% курса пройдено</p>
+                                </div>
+                            </div>
+                            <div class="mt-3 mb-3 my-courses-open-course-button">
+                                <a href="{{ progress.course_url }}">
+                                {% if progress.course_complete_in_percent < 1 %}
+                                Начать
+                                {% elif progress.course_complete_in_percent > 1 and progress.course_complete_in_percent < 100 %}
+                                Продолжить
+                                {% elif progress.course_complete_in_percent == 100 %}
+                                Открыть
+                                {% endif %}
+                                </a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+
+                {% empty %}
+                <div class="empty-course-list">
+                    {% if course_list_title == 'Все мои курсы' %}
+                        <div class="empty-course-list-title mt-3">
+                            Здесь будет список ваших курсов. Похоже, что вы еще не выбрали курс.
+                        </div>
+
+                        <div class="empty-course-list-button mt-3">
+                            <a href="{% url 'education_platform:get_all_courses' %}">
+                                Выбрать курсы
+                                <img src="{% static 'education_platform/common_icons/ver-g_academ_logo.svg' %}" alt="">
+                            </a>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+                {% endfor %}
+
+
+
+            </div>
+            <!-- /my-courses -->
+
+        </div>
+    </div>
+</div>
+
+<section class="latest-course-carousel-section pt-0">
+    <div class="container-lg container-fluid">
+      <div class="row">
+        <div class="col">
+          <div class="section_title text-center text-md-start">
+          <h3>Рекомендуем Вам:</h3>
+          </div>
+
+          <div class="owl-carousel owl-theme owl-carousel-recommended-courses">
+
+            {% for course in recommended_courses %}
+            
+              {% include 'education_platform/incl/course_card_item.html' %}
+            
+            {% endfor %}
+
+            <div class="course-card last-course-card">
+                <div class="get-all-course px-2 px-md-0">
+                  <a href="{% url 'education_platform:get_all_courses' %}"><h5>Посмотреть все курсы</h5></a>
+                </div>
+                <div class="course-card-vg-logo">
+                  <img src="{% static 'education_platform/images/vg_with_back.svg' %}" alt="">
+                </div>
+                <div class="course-card-vg-logo-2">
+                  <img src="{% static 'education_platform/images/vg_with_back.svg' %}" alt="">
+                </div>
+                <div class="course-card-vg-logo-3">
+                  <img src="{% static 'education_platform/images/vg_without_back.svg' %}" alt="">
+                </div>
+                <div class="course-card-vg-logo-4">
+                  <img src="{% static 'education_platform/images/vg_with_back.svg' %}" alt="">
+                </div>
+            </div>
+          </div>
+
+          <div class="next-course-card-owl-button position-md-absolute">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg>
+          </div>
+          
+          <!-- /carousel body -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ latest course section -->
+
+
+
+
+{% endblock %}
+
+{% block extrascripts %}
+<script src="{% static 'education_platform/owlcarousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'education_platform/js/my_courses.js' %}"></script>
+{% endblock %}

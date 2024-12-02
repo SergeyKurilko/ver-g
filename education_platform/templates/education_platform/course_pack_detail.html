@@ -1,0 +1,281 @@
+{% extends 'education_platform/education_platform_base.html' %}
+{% load static %}
+
+{% block head %}
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ course_pack.get_absolute_url }}" />
+<meta property="og:title" content="{{ course_pack.title }}" />
+<meta property="og:description" content="{{ course_pack.description|striptags|truncatewords:20 }}" />
+<meta property="og:image" content="{{ course_pack.image.url }}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="Вертоград Академия" />
+{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="{{ course_pack.meta_description }}">
+{% endblock %}
+
+
+
+{% block title %}{{ course_pack.title }}{% endblock %}
+
+{% block content %}
+{% include 'education_platform/incl/not_authenticated_modal.html' %}
+
+<!---->
+{% if not request.user.is_authenticated %}
+
+{% include 'education_platform/incl/login_form.html' %}
+{% include 'education_platform/incl/register_form.html' %}
+{% include 'education_platform/incl/reset_password_form.html' %}
+
+{% endif %}
+<!---->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "name": "{{ course_pack.title }}",
+  "description": "{{ course_pack.description|striptags|safe|truncatewords:20 }}",
+  "provider": {
+    "@type": "Organization",
+    "name": "Вертоград Академия",
+    "url": "https://ver-g.ru/academy/"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "category": "Paid",
+      "priceCurrency": "RUB",
+      "price": "{{ course_pack.price|floatformat }}"
+    }
+  ],
+  "timeRequired": "PT{{ course_pack.total_time_to_study }}H",
+  "url": "{{ course_pack.get_absolute_url }}"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "name" : "Вертоград Академия",
+  "url" : "https://ver-g.ru/academy/",
+  "logo": "{% static 'education_platform/common_icons/ver-g_academ_logo.svg' %}",
+  "contactPoint": [
+    {
+        "@type": "ContactPoint",
+        "telephone": "+7-991-737-07-40",
+        "contactType": "customer service",
+        "areaServed": "RU"
+    }
+  ]
+}
+</script>
+
+{% if not course_pack.published and not request.user.is_superuser %}
+<section class="course-promo__main m-auto">
+    <div class="page-fragment d-flex flex-column container-fluid container-md">
+        <div class="course-promo__main-content ">
+            <h3>Пакет курсов "{{ course_pack.title }}" снят с публикации и пока недоступен.</h3>
+        </div>
+        <div class="get-all-course-bottom px-2 px-md-0 w-100">
+            <a href="{% url 'education_platform:course_pack_list' %}"><h5>Посмотреть все пакеты курсов</h5></a>
+        </div>
+    </div>
+</section>
+
+{% else %}
+
+
+<section class="course-detail-head">
+    <div class="container-md container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-10">
+                <h1>{{ course_pack.title }}</h1>
+                <div class="">
+                    {{ course_pack.description|safe }}
+                </div>
+            </div>
+            <div class="col-2 d-none d-md-flex flex-column">
+                <img class="course-promo__course-cover" src="{{ course_pack.image.url }}" alt="Course cover" data-media-query="desktop">
+            </div>
+        </div>
+        <div class="row">
+            <div class="course_pack-widgets d-flex">
+                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
+                    </svg>
+                <div class="ms-2">{{ course_pack.total_time_to_study }}ч.</div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+<section class="course-promo__main">
+    <div class="page-fragment d-flex container-fluid container-md">
+        <div class="course-promo__main-content ">
+
+            <div id="CourseBlocks" class="course-total-blocks container-fluid container-md mt-1 ps-0">
+
+                <div class="blocks-for-course__container">
+
+                <h2 style="font-weight: 400;">В пакет курсов "{{ course_pack.title }}" входит:</h2>
+
+                {% for course_data in courses_data %}
+
+                    <div class="mt-4 d-flex justify-content-between">
+                        <a href="{{ course_data.course.get_absolute_url }}"><h5 style="font-weight: 500;">Курс: "{{ course_data.course.title }}"</h5></a>
+                        <div class="d-flex align-items-center">
+                            <a id="showHiddenCoursesButton{{ course_data.course.pk }}" class="mb-3 show-hidden-courses" href=""><img src="{% static 'education_platform/common_icons/chevron-compact-up.svg' %}" alt=""></a>
+                        </div>
+                        
+                        
+                    </div>
+
+                    {% if course_data.access_to_course %}
+                    <div class="mb-1" style="color: red"><h5>Вы уже подписаны на этот курс!</h5></div>
+                    {% endif %}
+
+                        <div id="coursesForPack{{ course_data.course.pk }}" class="d-flex row">
+                            <div class="col-12 col-md-10">{{ course_data.course.description|safe }}</div>
+                            <div class="d-none d-md-block col-md-2">
+                            <img class="course-image-in-pack me-5 mb-4" src="{{ course_data.course.image.url }}" alt="Обложка курса">
+                        </div>
+
+                        <div class="course-detail-collapse mb-3">
+                                <a class="" 
+                                data-bs-toggle="collapse" 
+                                href="#collapseForCourse{{ course_data.course.pk }}" 
+                                aria-expanded="false" 
+                                aria-controls="collapseForCourse{{ course_data.course.pk }}">
+                                    Содержание курса
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5zM3 3H2v1h1z"/>
+                                        <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1z"/>
+                                        <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5zM2 7h1v1H2zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm1 .5H2v1h1z"/>
+                                    </svg>
+                                </a>
+                                <div class="collapse" id="collapseForCourse{{ course_data.course.pk }}">
+                                    <div class="card card-body">
+                                        <ol class="ps-3 mb-0">
+                                      {% for block in course_data.course.blocks.all %}
+                                      <li>{{ block.title }}</li>
+                                      {% endfor %}
+                                        </ol>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <hr style="margin: 0;">   
+                {% endfor %}
+                </div>
+            </div>
+            <!-- /course-total-blocks -->
+
+            <div class="course-promo__content-block share-links container-fluid container-md mt-5 ps-0">
+                <h2 style="font-weight: 400;">Поделиться</h2>
+                <script src="https://yastatic.net/share2/share.js"></script>
+                <div class="ya-share2" data-curtain data-size="l" data-shape="normal"
+                    data-copy="extraItem"
+                    data-description='Пакет курсов "{{ course_pack.title }}"" от VER-G Academy.' 
+                    data-services="vkontakte,odnoklassniki,telegram,whatsapp"
+                    data-image="{{ course_pack.image.url }}"
+                    data-url="{{ course_pack.get_absolute_url }}">
+                </div>
+            </div>
+            <!-- /share-links -->
+
+            {% if not access_to_course_pack %}
+            <div class="get-course-large-block d-none d-md-block container mt-5 ps-0">
+                <h2>{{ course_pack.price|floatformat:"g" }}&nbsp;<span style="font-size: .85em; font-weight: lighter;">₽</span></h2>
+                <button id="getCourseBottomButton{{course.pk}}" class="btn btn-success get_course_button_desktop d-inline-flex get_course_button">Купить</button>
+            </div>
+            {% else %}
+            <div class="get-course-large-block d-none d-md-block container mt-5 ps-0">
+                <h2>Вы подписаны.</h2>
+                <a style="font-weight: 500; font-size: 1.2rem;" href="{% url 'education_platform:my_courses' %}">Перейти в раздел мои курсы.</a>
+            </div>
+            {% endif %}
+            <!-- /get-course-large-block -->
+
+
+        </div>
+
+        <div class="course-promo__main-aside d-none d-md-block">
+            <div class="course-promo__aside-sticky-wrapper">
+            
+                {% if not access_to_course_pack %}
+                <div class="course-promo__enrollment_aside">
+                    <h2>{{ course_pack.price|floatformat:"g" }}&nbsp;<span style="font-size: .85em; font-weight: lighter;">₽</span></h2>
+                    <button id="getCourseAsideButton{{course.pk}}" class="btn btn-success get_course_button_desktop d-inline-flex get_course_button">Купить</button>
+                </div>
+                {% else %}
+                <div class="course-promo__enrollment_aside">
+                    <h2>Вы подписаны.</h2>
+                    <a style="font-weight: 500; font-size: 1.2rem;" href="{% url 'education_platform:my_courses' %}">Перейти в раздел мои курсы.</a>
+                </div>
+                {% endif %}
+
+                <div class="course-promo__course_counters-aside mt-1">
+                    <h4>
+                        Курсов в пакете: {{ course_pack.courses.count }}
+                    </h4>
+                <ul>
+                    <!---->
+                        {% for course in course_pack.courses.all %}
+                        <li>
+                            <a href="{{ course.get_absolute_url }}">{{ course.title }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <!---->          
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+
+
+<section class="get-course-section d-md-none">
+    <div class="course-get-course-block container-fluid container-md mt-2">
+        {% if not access_to_course_pack %}
+        <h2>{{ course_pack.price|floatformat:"g" }}&nbsp;<span style="font-size: .85em; font-weight: lighter;">₽</span></h2>
+        <button id="getCourseBottomButton{{course.pk}}" class="btn btn-success get_course_button_desktop-bottom d-inline-flex get_course_button">Купить</button>
+        {% else %}
+        <h2>Вы подписаны.</h2>
+        <a style="font-weight: 500; font-size: 1.2rem;" href="{% url 'education_platform:my_courses' %}">Перейти в раздел мои курсы.</a>
+        {% endif %}
+    </div>
+    
+</section>
+
+<div class="get-paid-course-modal-place"></div>
+
+
+{% endif %}
+
+{% endblock %}
+
+{% block extrascripts %}
+{% if not request.user.is_authenticated %}
+<script src="{% static 'education_platform/js/auth_scripts.js' %}"></script>
+<script src="{% static 'education_platform/js/password_reset_script.js' %}"></script>
+{% endif %}
+<script src="{% static 'education_platform/js/course_pack_detail_script.js' %}"></script>
+<script>
+    var UpArrow = `<img src="{% static 'education_platform/common_icons/chevron-compact-up.svg' %}" alt="">`
+    var DownArrow = `<img src="{% static 'education_platform/common_icons/chevron-compact-down.svg' %}" alt="">`
+    var GetCoursePackUrl = `{% url 'education_platform:get_paid_course_pack' course_pack.pk %}`
+</script>
+{% endblock %}

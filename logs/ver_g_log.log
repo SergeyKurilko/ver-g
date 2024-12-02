@@ -1,0 +1,144 @@
+INFO 2024-12-01 22:58:21,946 basehttp 41760 135203957769792 "GET /api/training_courses_query/?API_KEY_VER_G=t264C12bHsRLgZtu HTTP/1.1" 200 1098
+INFO 2024-12-01 22:58:33,359 basehttp 41760 135203957769792 "POST /api/create_promo_from_bot/ HTTP/1.1" 201 193
+INFO 2024-12-01 23:01:53,282 autoreload 41760 135204556869632 /home/sergey/vertograd_site_from_host/api/views.py changed, reloading.
+INFO 2024-12-01 23:01:55,543 autoreload 42072 123359545798656 Watching for file changes with StatReloader
+INFO 2024-12-01 23:03:00,757 autoreload 42176 137245300744192 Watching for file changes with StatReloader
+INFO 2024-12-01 23:03:28,057 authentication 42176 137244711061056 {}
+INFO 2024-12-01 23:03:28,058 authentication 42176 137244700575296 {}
+INFO 2024-12-01 23:03:28,564 basehttp 42176 137244711061056 "GET /api/training_courses_query/?API_KEY_VER_G=t264C12bHsRLgZtu HTTP/1.1" 200 1098
+INFO 2024-12-01 23:03:28,567 basehttp 42176 137244700575296 "GET /api/training_courses_query/?API_KEY_VER_G=t264C12bHsRLgZtu HTTP/1.1" 200 1098
+INFO 2024-12-01 23:03:35,432 authentication 42176 137244700575296 {'course_pk': '65', 'sale_value': '50', 'validity_period': '2025-01-30', 'API_KEY_VER_G': 't264C12bHsRLgZtu'}
+INFO 2024-12-01 23:03:35,599 basehttp 42176 137244700575296 "POST /api/create_promo_from_bot/ HTTP/1.1" 201 193
+INFO 2024-12-01 23:12:57,900 autoreload 42176 137245300744192 /home/sergey/vertograd_site_from_host/api/authentication.py changed, reloading.
+INFO 2024-12-01 23:13:00,579 autoreload 42762 124691294547968 Watching for file changes with StatReloader
+INFO 2024-12-02 00:58:12,950 autoreload 48352 124366856806400 Watching for file changes with StatReloader
+INFO 2024-12-02 00:58:23,829 basehttp 48352 124366266304064 "GET / HTTP/1.1" 200 43867
+WARNING 2024-12-02 00:58:24,306 basehttp 48352 124366266304064 "GET /static/blog/css/ajax-loader.gif HTTP/1.1" 404 1831
+INFO 2024-12-02 00:58:53,079 autoreload 48438 127656092790784 Watching for file changes with StatReloader
+INFO 2024-12-02 00:59:05,322 authentication 48438 127655638730304 <rest_framework.request.Request: GET '/api/education_platform_get_report/?API_KEY_VER_G=t264C12bHsRLgZtu'>
+INFO 2024-12-02 00:59:05,617 basehttp 48438 127655638730304 "GET /api/education_platform_get_report/?API_KEY_VER_G=t264C12bHsRLgZtu HTTP/1.1" 200 181
+INFO 2024-12-02 00:59:19,715 authentication 48438 127655638730304 <rest_framework.request.Request: POST '/api/check_promo_from_bot/'>
+WARNING 2024-12-02 00:59:19,792 log 48438 127655638730304 Not Found: /api/check_promo_from_bot/
+WARNING 2024-12-02 00:59:19,792 basehttp 48438 127655638730304 "POST /api/check_promo_from_bot/ HTTP/1.1" 404 46
+INFO 2024-12-02 00:59:26,484 authentication 48438 127655638730304 <rest_framework.request.Request: GET '/api/training_courses_query/?API_KEY_VER_G=t264C12bHsRLgZtu'>
+INFO 2024-12-02 00:59:26,566 basehttp 48438 127655638730304 "GET /api/training_courses_query/?API_KEY_VER_G=t264C12bHsRLgZtu HTTP/1.1" 200 1098
+INFO 2024-12-02 00:59:33,600 authentication 48438 127655638730304 <rest_framework.request.Request: POST '/api/create_promo_from_bot/'>
+INFO 2024-12-02 00:59:33,724 basehttp 48438 127655638730304 "POST /api/create_promo_from_bot/ HTTP/1.1" 201 160
+INFO 2024-12-02 01:31:08,801 autoreload 50263 138303180275712 Watching for file changes with StatReloader
+INFO 2024-12-02 01:31:21,469 basehttp 50263 138302724245056 "GET / HTTP/1.1" 200 43867
+WARNING 2024-12-02 01:31:22,108 basehttp 50263 138302724245056 "GET /static/blog/css/ajax-loader.gif HTTP/1.1" 404 1831
+INFO 2024-12-02 01:31:24,055 basehttp 50263 138302724245056 "GET /blog/ HTTP/1.1" 200 46874
+INFO 2024-12-02 01:31:24,494 basehttp 50263 138302724245056 "GET /media/blog/images/2024/07/12/1_r87gaSu.jpg HTTP/1.1" 200 93074
+INFO 2024-12-02 01:31:24,497 basehttp 50263 138302575347264 "GET /media/blog/images/2024/07/12/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B02_FMmDp7X.jpg HTTP/1.1" 200 140339
+INFO 2024-12-02 01:31:24,546 basehttp 50263 138302564861504 "GET /media/blog/images/2024/07/12/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B02_cxlzNoo.jpg HTTP/1.1" 200 140339
+INFO 2024-12-02 01:31:26,495 basehttp 50263 138302564861504 "GET /blog/post/testovaya-statya-9/ HTTP/1.1" 200 44924
+INFO 2024-12-02 01:31:26,819 basehttp 50263 138302575347264 "GET /media/blog/images/2024/07/12/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B03.jpg HTTP/1.1" 200 308753
+INFO 2024-12-02 01:31:26,831 basehttp 50263 138302564861504 "GET /media/blog/images/2024/07/12/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B02_NDH9J0k.jpg HTTP/1.1" 200 140339
+INFO 2024-12-02 01:31:31,384 basehttp 50263 138302564861504 "POST /comments/add_new_comment_for_article/12/ HTTP/1.1" 200 370
+INFO 2024-12-02 01:31:31,651 basehttp 50263 138302564861504 "GET /__debug__/history_sidebar/?store_id=50005c4830f84905b90a457eda9310bc HTTP/1.1" 200 14307
+INFO 2024-12-02 01:32:25,397 autoreload 50431 132162653396992 Watching for file changes with StatReloader
+INFO 2024-12-02 01:33:15,004 autoreload 50431 132162653396992 /home/sergey/vertograd_site_from_host/api/authentication.py changed, reloading.
+INFO 2024-12-02 01:33:16,839 autoreload 50494 134367488081920 Watching for file changes with StatReloader
+INFO 2024-12-02 01:33:19,798 autoreload 50513 139584977989632 Watching for file changes with StatReloader
+INFO 2024-12-02 01:34:00,959 autoreload 50602 123922115055616 Watching for file changes with StatReloader
+INFO 2024-12-02 01:34:23,057 authentication 50602 123921523279424 <rest_framework.request.Request: DELETE '/api/delete_comment_for_article/'>
+WARNING 2024-12-02 01:34:23,208 log 50602 123921523279424 Forbidden: /api/delete_comment_for_article/
+WARNING 2024-12-02 01:34:23,208 basehttp 50602 123921523279424 "DELETE /api/delete_comment_for_article/ HTTP/1.1" 403 28
+INFO 2024-12-02 01:35:33,197 authentication 50602 123921523279424 <rest_framework.request.Request: DELETE '/api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=336'>
+WARNING 2024-12-02 01:35:33,812 log 50602 123921523279424 Bad Request: /api/delete_comment_for_article/
+WARNING 2024-12-02 01:35:33,815 basehttp 50602 123921523279424 "DELETE /api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=336 HTTP/1.1" 400 39
+INFO 2024-12-02 01:37:37,497 authentication 50602 123921523279424 <rest_framework.request.Request: DELETE '/api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=336'>
+WARNING 2024-12-02 01:37:38,932 log 50602 123921523279424 Bad Request: /api/delete_comment_for_article/
+WARNING 2024-12-02 01:37:38,934 basehttp 50602 123921523279424 "DELETE /api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=336 HTTP/1.1" 400 39
+INFO 2024-12-02 01:38:28,150 autoreload 50602 123922115055616 /home/sergey/vertograd_site_from_host/api/views.py changed, reloading.
+INFO 2024-12-02 01:38:30,588 autoreload 50776 138436417888256 Watching for file changes with StatReloader
+INFO 2024-12-02 01:38:38,836 autoreload 50848 136442121375744 Watching for file changes with StatReloader
+INFO 2024-12-02 01:38:43,003 authentication 50848 136441667520064 <rest_framework.request.Request: DELETE '/api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=336'>
+INFO 2024-12-02 01:38:43,312 basehttp 50848 136441667520064 "DELETE /api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=336 HTTP/1.1" 200 64
+INFO 2024-12-02 01:39:47,856 basehttp 50848 136441667520064 "GET / HTTP/1.1" 200 43867
+WARNING 2024-12-02 01:39:48,526 basehttp 50848 136441667520064 "GET /static/blog/css/ajax-loader.gif HTTP/1.1" 404 1831
+INFO 2024-12-02 01:39:50,427 basehttp 50848 136441512330816 "GET /blog/ HTTP/1.1" 200 46875
+INFO 2024-12-02 01:39:54,824 basehttp 50848 136441512330816 "GET /blog/post/testovaya-statya-9/ HTTP/1.1" 200 44923
+INFO 2024-12-02 01:40:01,521 basehttp 50848 136441512330816 "GET /blog/post/testovaya-statya-2/ HTTP/1.1" 200 38461
+INFO 2024-12-02 01:40:06,178 basehttp 50848 136441512330816 "POST /comments/add_new_comment_for_article/5/ HTTP/1.1" 200 370
+INFO 2024-12-02 01:40:06,394 basehttp 50848 136441512330816 "GET /__debug__/history_sidebar/?store_id=f4abc269e66e47be9bfc7182f9f63728 HTTP/1.1" 200 14306
+INFO 2024-12-02 01:40:38,528 basehttp 50848 136441512330816 "GET /blog/post/testovaya-statya-2/ HTTP/1.1" 200 40728
+INFO 2024-12-02 01:40:42,603 basehttp 50848 136441512330816 "POST /comments/add_new_comment_for_article/5/ HTTP/1.1" 200 420
+INFO 2024-12-02 01:40:42,819 basehttp 50848 136441512330816 "GET /__debug__/history_sidebar/?store_id=556e906f9a3d42a0877df0ab93e57dc1 HTTP/1.1" 200 14302
+INFO 2024-12-02 01:40:57,211 basehttp 50848 136441512330816 "POST /comments/add_new_comment_for_article/5/ HTTP/1.1" 200 420
+INFO 2024-12-02 01:40:57,427 basehttp 50848 136441512330816 "GET /__debug__/history_sidebar/?store_id=8f5bec5e82f949a9bf4475c7d0fb7b4c HTTP/1.1" 200 14302
+INFO 2024-12-02 01:41:05,248 basehttp 50848 136441512330816 "POST /comments/add_new_comment_for_article/5/ HTTP/1.1" 200 420
+INFO 2024-12-02 01:41:05,465 basehttp 50848 136441512330816 "GET /__debug__/history_sidebar/?store_id=3ad66576fb4d48ee9000864bacd0e2c0 HTTP/1.1" 200 14302
+INFO 2024-12-02 01:41:16,175 basehttp 50848 136441512330816 "POST /comments/add_new_comment_for_article/5/ HTTP/1.1" 200 370
+INFO 2024-12-02 01:41:16,393 basehttp 50848 136441512330816 "GET /__debug__/history_sidebar/?store_id=816b836251d646bcadcbfa85c108ba4e HTTP/1.1" 200 14306
+INFO 2024-12-02 01:41:20,081 authentication 50848 136441667520064 <rest_framework.request.Request: DELETE '/api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=338'>
+INFO 2024-12-02 01:41:20,181 basehttp 50848 136441667520064 "DELETE /api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=338 HTTP/1.1" 200 64
+INFO 2024-12-02 01:41:24,997 basehttp 50848 136441512330816 "GET /blog/post/testovaya-statya-2/ HTTP/1.1" 200 40727
+INFO 2024-12-02 01:43:40,901 basehttp 50848 136441512330816 "POST /comments/add_new_comment_for_article/5/ HTTP/1.1" 200 370
+INFO 2024-12-02 01:43:41,124 basehttp 50848 136441512330816 "GET /__debug__/history_sidebar/?store_id=d34c52f7537f4f2c8dca22284ce67be9 HTTP/1.1" 200 14306
+INFO 2024-12-02 01:43:57,533 authentication 50848 136441667520064 <rest_framework.request.Request: DELETE '/api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=339'>
+INFO 2024-12-02 01:43:57,601 basehttp 50848 136441667520064 "DELETE /api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=339 HTTP/1.1" 200 64
+INFO 2024-12-02 01:46:03,956 authentication 50848 136441667520064 <rest_framework.request.Request: DELETE '/api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=339'>
+WARNING 2024-12-02 01:46:04,171 log 50848 136441667520064 Not Found: /api/delete_comment_for_article/
+WARNING 2024-12-02 01:46:04,173 basehttp 50848 136441667520064 "DELETE /api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=339 HTTP/1.1" 404 29
+INFO 2024-12-02 01:46:16,462 basehttp 50848 136441512330816 "GET /blog/post/testovaya-statya-2/ HTTP/1.1" 200 40804
+INFO 2024-12-02 01:46:22,200 basehttp 50848 136441512330816 "POST /comments/add_answer_for_comment/5/337/ HTTP/1.1" 200 278
+INFO 2024-12-02 01:46:22,418 basehttp 50848 136441512330816 "GET /__debug__/history_sidebar/?store_id=6af0a5de342c4d53b69b4831d890cbe4 HTTP/1.1" 200 14299
+INFO 2024-12-02 01:46:28,713 authentication 50848 136441667520064 <rest_framework.request.Request: DELETE '/api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=340'>
+INFO 2024-12-02 01:46:28,774 basehttp 50848 136441667520064 "DELETE /api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=340 HTTP/1.1" 200 64
+INFO 2024-12-02 01:46:54,251 basehttp 50848 136441512330816 "GET /blog/post/testovaya-statya-2/ HTTP/1.1" 200 40802
+INFO 2024-12-02 01:46:56,742 basehttp 50848 136441512330816 "GET /blog/post/testovaya-statya-2/?offset=3 HTTP/1.1" 200 16
+INFO 2024-12-02 01:46:56,962 basehttp 50848 136441512330816 "GET /__debug__/history_sidebar/?store_id=0df5a0bdae804ee892ba69167153612b HTTP/1.1" 200 14291
+INFO 2024-12-02 01:47:06,061 basehttp 50848 136441512330816 "POST /comments/add_new_comment_for_article/5/ HTTP/1.1" 200 420
+INFO 2024-12-02 01:47:06,276 basehttp 50848 136441512330816 "GET /__debug__/history_sidebar/?store_id=b879df49201c4193acd05423092be135 HTTP/1.1" 200 14302
+INFO 2024-12-02 01:47:13,314 basehttp 50848 136441512330816 "POST /comments/add_new_comment_for_article/5/ HTTP/1.1" 200 420
+INFO 2024-12-02 01:47:13,531 basehttp 50848 136441512330816 "GET /__debug__/history_sidebar/?store_id=01a51b4cbd36474c820e27e0ea205f0d HTTP/1.1" 200 14302
+INFO 2024-12-02 01:47:20,114 basehttp 50848 136441512330816 "POST /comments/add_new_comment_for_article/5/ HTTP/1.1" 200 420
+INFO 2024-12-02 01:47:20,332 basehttp 50848 136441512330816 "GET /__debug__/history_sidebar/?store_id=a59e32e8a3e9452a8b31012bab52d078 HTTP/1.1" 200 14302
+INFO 2024-12-02 01:47:26,482 basehttp 50848 136441512330816 "POST /comments/add_new_comment_for_article/5/ HTTP/1.1" 200 370
+INFO 2024-12-02 01:47:26,703 basehttp 50848 136441512330816 "GET /__debug__/history_sidebar/?store_id=8ed0f717f0334fc8a2a858f3abc21652 HTTP/1.1" 200 14306
+INFO 2024-12-02 01:47:30,275 basehttp 50848 136441512330816 "GET /blog/post/testovaya-statya-2/ HTTP/1.1" 200 42531
+INFO 2024-12-02 01:47:33,852 authentication 50848 136441667520064 <rest_framework.request.Request: DELETE '/api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=341'>
+INFO 2024-12-02 01:47:33,912 basehttp 50848 136441667520064 "DELETE /api/delete_comment_for_article/?API_KEY_VER_G=t264C12bHsRLgZtu&comment_id=341 HTTP/1.1" 200 64
+INFO 2024-12-02 01:47:42,744 basehttp 50848 136441512330816 "GET /blog/post/testovaya-statya-2/ HTTP/1.1" 200 40801
+INFO 2024-12-02 11:49:13,032 autoreload 5268 132297907269632 Watching for file changes with StatReloader
+INFO 2024-12-02 11:49:19,471 basehttp 5268 132297315583552 "GET / HTTP/1.1" 200 43867
+INFO 2024-12-02 11:49:19,878 basehttp 5268 132297292514880 "GET /static/blog/image/portfolio/portfolio_4.jpg HTTP/1.1" 200 315691
+INFO 2024-12-02 11:49:19,884 basehttp 5268 132297303000640 "GET /static/blog/image/portfolio/portfolio_3.jpg HTTP/1.1" 200 353226
+INFO 2024-12-02 11:49:19,887 basehttp 5268 132297137325632 "GET /static/blog/image/portfolio/portfolio_6.jpg HTTP/1.1" 200 324485
+INFO 2024-12-02 11:49:19,918 basehttp 5268 132297292514880 "GET /static/blog/image/background/header_big_image.jpg HTTP/1.1" 200 746723
+INFO 2024-12-02 11:49:19,933 basehttp 5268 132297126839872 "GET /static/blog/image/background/background.jpg HTTP/1.1" 200 1819615
+INFO 2024-12-02 11:49:20,067 basehttp 5268 132297315583552 "GET /media/blog/images/2024/11/05/jahanzeb-ahsan-I2UR7VLpTzM-unsplash.jpg HTTP/1.1" 200 2192617
+WARNING 2024-12-02 11:49:20,112 basehttp 5268 132297126839872 "GET /static/blog/css/ajax-loader.gif HTTP/1.1" 404 1831
+INFO 2024-12-02 11:49:23,315 basehttp 5268 132297315583552 "GET /uslugi/ HTTP/1.1" 200 20679
+INFO 2024-12-02 11:49:24,900 basehttp 5268 132297315583552 "GET /academy/ HTTP/1.1" 200 38031
+INFO 2024-12-02 11:49:24,970 basehttp 5268 132297315583552 "GET /static/education_platform/css/education_platform_style.css HTTP/1.1" 304 0
+INFO 2024-12-02 11:49:25,017 basehttp 5268 132297315583552 "GET /static/education_platform/images/banner-background.png HTTP/1.1" 200 262416
+INFO 2024-12-02 11:49:25,105 basehttp 5268 132297292514880 "GET /static/education_platform/js/navbar-script.js HTTP/1.1" 304 0
+INFO 2024-12-02 11:49:25,187 basehttp 5268 132297303000640 "GET /static/education_platform/fonts/Roboto-Medium.ttf HTTP/1.1" 200 168644
+INFO 2024-12-02 11:49:25,406 basehttp 5268 132297315583552 "GET /media/media/education_platform/images/sql_image_UWXxmVy.jpeg HTTP/1.1" 200 5152
+INFO 2024-12-02 11:49:25,486 basehttp 5268 132297292514880 "GET /media/media/education_platform/images/rat_wgAzpJn.jpeg HTTP/1.1" 200 6138
+INFO 2024-12-02 11:49:25,558 basehttp 5268 132297116354112 "GET /media/media/education_platform/images/test_wraper_H06gHkK.jpeg HTTP/1.1" 200 62513
+INFO 2024-12-02 11:49:25,569 basehttp 5268 132297126839872 "GET /media/media/education_platform/images/unitaz_UNOGtSQ.jpeg HTTP/1.1" 200 1996
+INFO 2024-12-02 11:49:25,600 basehttp 5268 132297137325632 "GET /media/media/education_platform/images/test_wraper_k0D2n7P.jpeg HTTP/1.1" 200 62513
+INFO 2024-12-02 11:49:25,601 basehttp 5268 132297303000640 "GET /media/media/education_platform/images/test_wraper_pT4EEzY.jpeg HTTP/1.1" 200 62513
+INFO 2024-12-02 11:49:25,685 basehttp 5268 132297315583552 "GET /media/media/education_platform/images/1.png HTTP/1.1" 200 289316
+INFO 2024-12-02 11:49:27,807 basehttp 5268 132297315583552 "GET /academy/personal_account/my_courses/ HTTP/1.1" 200 47038
+INFO 2024-12-02 11:49:27,941 basehttp 5268 132297116354112 "GET /static/education_platform/js/my_courses.js HTTP/1.1" 304 0
+INFO 2024-12-02 11:49:28,190 basehttp 5268 132297303000640 "GET /media/media/education_platform/images/course_complete_flowers.png HTTP/1.1" 200 849842
+INFO 2024-12-02 11:49:28,248 basehttp 5268 132297315583552 "GET /media/education_platform/student/avatars/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B02.jpg HTTP/1.1" 200 140339
+INFO 2024-12-02 11:49:28,266 basehttp 5268 132297137325632 "GET /media/media/education_platform/images/dress_5.jpg HTTP/1.1" 200 848574
+INFO 2024-12-02 11:49:28,267 basehttp 5268 132297292514880 "GET /media/media/education_platform/images/gettyimages-1329412845-612x612.jpg HTTP/1.1" 200 61226
+INFO 2024-12-02 11:49:28,268 basehttp 5268 132297126839872 "GET /media/media/education_platform/images/sql_image_rR1hRDg.jpeg HTTP/1.1" 200 5152
+INFO 2024-12-02 11:49:30,023 basehttp 5268 132297292514880 "GET /academy/courses/kurs-s-dvumya-shagami/ HTTP/1.1" 200 30530
+INFO 2024-12-02 11:49:30,107 basehttp 5268 132297126839872 "GET /static/education_platform/js/course_progress_dashboard.js HTTP/1.1" 304 0
+INFO 2024-12-02 11:49:30,223 basehttp 5268 132297292514880 "GET /media/media/education_platform/images/promo_in_dashboard/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B02.jpg HTTP/1.1" 200 140339
+INFO 2024-12-02 11:49:30,230 basehttp 5268 132297137325632 "GET /media/media/education_platform/images/promo_in_dashboard/django_image.jpeg HTTP/1.1" 200 5377
+INFO 2024-12-02 11:49:32,301 basehttp 5268 132297292514880 "GET /academy/course/progress/69/124/ HTTP/1.1" 200 50888
+INFO 2024-12-02 11:49:32,375 basehttp 5268 132297292514880 "GET /static/education_platform/quill/quill.js HTTP/1.1" 200 203481
+INFO 2024-12-02 11:49:32,387 basehttp 5268 132297137325632 "GET /static/education_platform/images/button_2.svg HTTP/1.1" 304 0
+INFO 2024-12-02 11:49:32,448 basehttp 5268 132297292514880 "GET /static/education_platform/js/make_step_is_completed_script.js HTTP/1.1" 304 0
+INFO 2024-12-02 11:49:32,513 basehttp 5268 132297292514880 "GET /static/education_platform/js/comments_script.js HTTP/1.1" 304 0
+INFO 2024-12-02 11:49:32,597 basehttp 5268 132297126839872 "GET /media/education_platform/student/avatars/1.png HTTP/1.1" 200 289316
+INFO 2024-12-02 11:49:32,851 basehttp 5268 132297126839872 "POST /academy/ajax_make_step_is_completed/ HTTP/1.1" 200 31
+INFO 2024-12-02 11:49:33,944 basehttp 5268 132297126839872 "GET /academy/course/progress/69/125/ HTTP/1.1" 200 90964
