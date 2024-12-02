@@ -12,17 +12,13 @@ class VergAuthentication(BaseAuthentication):
         api_key = None
 
         logger.info(request)
-        print('Пришли на аутентификацию')
 
         if request.method == 'GET' or request.method == 'DELETE':
-            print('Пришел delete')
             # Если get или delete, ключ приходит в params запроса
             api_key = request.query_params.get("API_KEY_VER_G")
-            print(f'api_key = {api_key}')
         elif request.method == 'POST':
             # Если метод POST, то api_key находится в теле запроса
             api_key = request.data.get("API_KEY_VER_G")
-            print(api_key)
         if api_key != API_KEY_VER_G:
             raise AuthenticationFailed('Invalid API key')
         else:

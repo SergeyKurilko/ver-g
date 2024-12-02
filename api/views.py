@@ -35,7 +35,6 @@ class CreatePromoFromTelegramBot(APIView):
     authentication_classes = [VergAuthentication]
 
     def post(self, request, format=None):
-        print('Дошли до пост')
         course_pk = request.data.get('course_pk')
         sale_value = request.data.get('sale_value')
         validity_period = request.data.get('validity_period')
