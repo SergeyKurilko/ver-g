@@ -142,3 +142,137 @@ INFO 2024-12-02 11:49:32,513 basehttp 5268 132297292514880 "GET /static/educatio
 INFO 2024-12-02 11:49:32,597 basehttp 5268 132297126839872 "GET /media/education_platform/student/avatars/1.png HTTP/1.1" 200 289316
 INFO 2024-12-02 11:49:32,851 basehttp 5268 132297126839872 "POST /academy/ajax_make_step_is_completed/ HTTP/1.1" 200 31
 INFO 2024-12-02 11:49:33,944 basehttp 5268 132297126839872 "GET /academy/course/progress/69/125/ HTTP/1.1" 200 90964
+INFO 2024-12-02 13:53:10,143 autoreload 11374 133188600717312 Watching for file changes with StatReloader
+INFO 2024-12-02 13:53:17,201 basehttp 11374 133188007495232 "GET / HTTP/1.1" 200 43867
+INFO 2024-12-02 13:53:17,966 basehttp 11374 133187997009472 "GET /media/blog/images/2024/07/12/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B02_Nv8Cuw4.jpg HTTP/1.1" 200 140339
+WARNING 2024-12-02 13:53:17,980 basehttp 11374 133187976037952 "GET /static/blog/css/ajax-loader.gif HTTP/1.1" 404 1831
+INFO 2024-12-02 13:53:17,985 basehttp 11374 133188007495232 "GET /media/blog/images/2024/11/05/jahanzeb-ahsan-I2UR7VLpTzM-unsplash.jpg HTTP/1.1" 200 2192617
+INFO 2024-12-02 13:53:18,007 basehttp 11374 133187986523712 "GET /media/services/images/gettyimages-1315295503-612x612.jpg HTTP/1.1" 200 47945
+INFO 2024-12-02 13:53:33,337 basehttp 11374 133188007495232 "GET /uslugi/ HTTP/1.1" 200 20679
+INFO 2024-12-02 13:53:34,886 basehttp 11374 133188007495232 "GET /academy/ HTTP/1.1" 200 38030
+INFO 2024-12-02 13:53:35,043 basehttp 11374 133187986523712 "GET /static/education_platform/js/homepage_script.js HTTP/1.1" 304 0
+INFO 2024-12-02 13:53:35,270 basehttp 11374 133188007495232 "GET /media/media/education_platform/images/sql_image_UWXxmVy.jpeg HTTP/1.1" 200 5152
+INFO 2024-12-02 13:53:35,388 basehttp 11374 133187955066432 "GET /media/media/education_platform/images/test_wraper_pT4EEzY.jpeg HTTP/1.1" 200 62513
+INFO 2024-12-02 13:53:35,417 basehttp 11374 133187976037952 "GET /media/media/education_platform/images/unitaz_UNOGtSQ.jpeg HTTP/1.1" 200 1996
+INFO 2024-12-02 13:53:35,438 basehttp 11374 133187965552192 "GET /media/media/education_platform/images/test_wraper_H06gHkK.jpeg HTTP/1.1" 200 62513
+INFO 2024-12-02 13:53:35,446 basehttp 11374 133187986523712 "GET /media/media/education_platform/images/rat_wgAzpJn.jpeg HTTP/1.1" 200 6138
+INFO 2024-12-02 13:53:35,450 basehttp 11374 133187997009472 "GET /media/media/education_platform/images/test_wraper_k0D2n7P.jpeg HTTP/1.1" 200 62513
+INFO 2024-12-02 13:53:35,514 basehttp 11374 133188007495232 "GET /media/media/education_platform/images/1.png HTTP/1.1" 200 289316
+INFO 2024-12-02 13:54:00,200 basehttp 11374 133188007495232 "GET /academy/courses/kurs-v-kotorom-mnogo-shagov/ HTTP/1.1" 200 39618
+INFO 2024-12-02 13:54:00,286 basehttp 11374 133188007495232 "GET /static/education_platform/js/course_detail_script.js HTTP/1.1" 304 0
+INFO 2024-12-02 13:54:29,180 basehttp 11374 133188007495232 "GET /academy/personal_account/ HTTP/1.1" 200 28123
+INFO 2024-12-02 13:54:29,268 basehttp 11374 133187997009472 "GET /static/education_platform/js/personal_account_script.js HTTP/1.1" 304 0
+INFO 2024-12-02 13:54:29,330 basehttp 11374 133188007495232 "GET /media/education_platform/student/avatars/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B02.jpg HTTP/1.1" 200 140339
+INFO 2024-12-02 13:54:38,317 basehttp 11374 133188007495232 "GET /academy/personal_account/my_certificates/ HTTP/1.1" 200 25424
+INFO 2024-12-02 13:54:38,356 basehttp 11374 133188007495232 "GET /static/education_platform/images/certificate_images/cerificate-small-sceleton.png HTTP/1.1" 200 132821
+INFO 2024-12-02 13:54:39,388 basehttp 11374 133188007495232 "GET /academy/cert/228/ HTTP/1.1" 200 29691
+INFO 2024-12-02 13:54:39,434 basehttp 11374 133187997009472 "GET /static/education_platform/css/certificate_style.css HTTP/1.1" 304 0
+INFO 2024-12-02 13:54:39,531 basehttp 11374 133187997009472 "GET /static/education_platform/js/get_certificate_script.js HTTP/1.1" 304 0
+INFO 2024-12-02 13:54:39,629 basehttp 11374 133187986523712 "GET /media/media/education_platform/images/sql_image_rR1hRDg.jpeg HTTP/1.1" 200 5152
+WARNING 2024-12-02 13:54:39,820 log 11374 133187804071488 Not Found: /style.css
+WARNING 2024-12-02 13:54:39,821 basehttp 11374 133187804071488 "GET /style.css HTTP/1.1" 404 19600
+INFO 2024-12-02 13:54:39,827 basehttp 11374 133187793585728 "GET /static/education_platform/css/certificate_style.css HTTP/1.1" 200 3338
+WARNING 2024-12-02 13:54:40,020 log 11374 133187793585728 Not Found: /Montserrat-MediumItalic.ttf
+WARNING 2024-12-02 13:54:40,021 basehttp 11374 133187793585728 "GET /Montserrat-MediumItalic.ttf HTTP/1.1" 404 19673
+WARNING 2024-12-02 13:54:40,106 log 11374 133187793585728 Not Found: /Montserrat-Bold.ttf
+WARNING 2024-12-02 13:54:40,106 basehttp 11374 133187793585728 "GET /Montserrat-Bold.ttf HTTP/1.1" 404 19640
+WARNING 2024-12-02 13:54:40,179 log 11374 133187793585728 Not Found: /Montserrat-BoldItalic.ttf
+WARNING 2024-12-02 13:54:40,180 basehttp 11374 133187793585728 "GET /Montserrat-BoldItalic.ttf HTTP/1.1" 404 19664
+INFO 2024-12-02 13:54:40,201 basehttp 11374 133187793585728 "GET /static/education_platform/images/certificate_images/certificate_border.png HTTP/1.1" 200 1329502
+INFO 2024-12-02 13:54:40,343 basehttp 11374 133187793585728 "GET /media/media/education_platform/images/signatures/signature_elena_pSjFVFZ.svg HTTP/1.1" 200 15987
+INFO 2024-12-02 13:54:40,348 basehttp 11374 133187793585728 "GET /static/education_platform/images/certificate_images/footer_logo.svg HTTP/1.1" 200 5894
+INFO 2024-12-02 13:54:40,848 basehttp 11374 133188007495232 "GET /academy/certificate/228/image HTTP/1.1" 200 202298
+INFO 2024-12-02 13:54:53,265 basehttp 11374 133188007495232 "GET /academy/personal_account/my_courses/ HTTP/1.1" 200 47037
+INFO 2024-12-02 13:54:53,654 basehttp 11374 133187976037952 "GET /media/media/education_platform/images/test_wraper_k0D2n7P.jpeg HTTP/1.1" 200 62513
+INFO 2024-12-02 13:54:53,675 basehttp 11374 133187997009472 "GET /media/media/education_platform/images/sql_image_UWXxmVy.jpeg HTTP/1.1" 200 5152
+INFO 2024-12-02 13:54:53,706 basehttp 11374 133187965552192 "GET /media/media/education_platform/images/rat_wgAzpJn.jpeg HTTP/1.1" 200 6138
+INFO 2024-12-02 13:54:53,744 basehttp 11374 133187986523712 "GET /media/media/education_platform/images/unitaz_UNOGtSQ.jpeg HTTP/1.1" 200 1996
+INFO 2024-12-02 13:54:53,776 basehttp 11374 133187955066432 "GET /media/media/education_platform/images/test_wraper_H06gHkK.jpeg HTTP/1.1" 200 62513
+INFO 2024-12-02 13:54:53,800 basehttp 11374 133188007495232 "GET /media/media/education_platform/images/course_complete_flowers.png HTTP/1.1" 200 849842
+INFO 2024-12-02 13:54:53,877 basehttp 11374 133187976037952 "GET /media/media/education_platform/images/test_wraper_pT4EEzY.jpeg HTTP/1.1" 200 62513
+INFO 2024-12-02 13:54:53,914 basehttp 11374 133187997009472 "GET /media/media/education_platform/images/dress_5.jpg HTTP/1.1" 200 848574
+INFO 2024-12-02 13:54:53,924 basehttp 11374 133187965552192 "GET /media/media/education_platform/images/gettyimages-1329412845-612x612.jpg HTTP/1.1" 200 61226
+INFO 2024-12-02 13:54:57,939 basehttp 11374 133187965552192 "GET /academy/courses/all/ HTTP/1.1" 200 48039
+INFO 2024-12-02 13:55:04,344 basehttp 11374 133187965552192 "GET /academy/courses/all/?page=2&price_from=&price_to= HTTP/1.1" 200 50000
+INFO 2024-12-02 13:55:04,600 basehttp 11374 133187965552192 "GET /media/media/education_platform/images/gettyimages-1329412845-612x612_7L8ojEK.jpg HTTP/1.1" 200 61226
+INFO 2024-12-02 13:55:04,610 basehttp 11374 133187997009472 "GET /media/media/education_platform/images/gettyimages-1315295503-612x612.jpg HTTP/1.1" 200 47945
+INFO 2024-12-02 13:55:44,839 basehttp 11374 133187997009472 "GET /academy/courses/kurs-v-kotorom-mnogo-shagov/ HTTP/1.1" 200 39616
+INFO 2024-12-02 13:56:03,489 basehttp 11374 133187997009472 "GET /academy/courses/get_course/50/ HTTP/1.1" 200 96
+INFO 2024-12-02 13:56:03,555 basehttp 11374 133187997009472 "GET /academy/courses/get_paid_course/50/ HTTP/1.1" 200 4034
+INFO 2024-12-02 13:56:03,815 basehttp 11374 133187997009472 "GET /__debug__/history_sidebar/?store_id=a88e735092f444ccbcf2853ea64a249f HTTP/1.1" 200 14371
+INFO 2024-12-02 13:56:21,658 basehttp 11374 133187997009472 "GET /academy/courses/verstalschik-i-kosilschik/ HTTP/1.1" 200 36411
+INFO 2024-12-02 13:56:26,731 basehttp 11374 133187997009472 "GET /academy/courses/get_course/51/ HTTP/1.1" 200 96
+INFO 2024-12-02 13:56:26,793 basehttp 11374 133187997009472 "GET /academy/courses/get_paid_course/51/ HTTP/1.1" 200 5641
+INFO 2024-12-02 13:56:27,046 basehttp 11374 133187997009472 "GET /__debug__/history_sidebar/?store_id=250038059648492f9f5ae7c437fb6aa8 HTTP/1.1" 200 14371
+INFO 2024-12-02 13:56:40,625 basehttp 11374 133187997009472 "POST /academy/ajax/use_promo_code_view HTTP/1.1" 200 173
+INFO 2024-12-02 13:56:40,843 basehttp 11374 133187997009472 "GET /__debug__/history_sidebar/?store_id=40b95fa8b81b47a9ac8c3eda799316ef HTTP/1.1" 200 14287
+INFO 2024-12-02 13:56:56,839 basehttp 11374 133187997009472 "GET / HTTP/1.1" 200 43867
+INFO 2024-12-02 13:56:57,405 basehttp 11374 133187965552192 "GET /media/blog/images/2024/07/12/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B02_Nv8Cuw4.jpg HTTP/1.1" 200 140339
+WARNING 2024-12-02 13:56:57,423 basehttp 11374 133188007495232 "GET /static/blog/css/ajax-loader.gif HTTP/1.1" 404 1831
+INFO 2024-12-02 13:56:57,437 basehttp 11374 133187997009472 "GET /media/blog/images/2024/11/05/jahanzeb-ahsan-I2UR7VLpTzM-unsplash.jpg HTTP/1.1" 200 2192617
+INFO 2024-12-02 13:56:57,470 basehttp 11374 133187976037952 "GET /media/services/images/gettyimages-1315295503-612x612.jpg HTTP/1.1" 200 47945
+INFO 2024-12-02 13:56:59,705 basehttp 11374 133187976037952 "GET /admin HTTP/1.1" 301 0
+INFO 2024-12-02 13:56:59,872 basehttp 11374 133187997009472 "GET /admin/ HTTP/1.1" 200 37206
+WARNING 2024-12-02 13:57:00,147 log 11374 133187997009472 Not Found: /favicon.ico
+WARNING 2024-12-02 13:57:00,147 basehttp 11374 133187997009472 "GET /favicon.ico HTTP/1.1" 404 19608
+INFO 2024-12-02 13:57:04,496 basehttp 11374 133187997009472 "GET /admin/education_platform/coursepack/ HTTP/1.1" 200 39519
+INFO 2024-12-02 13:57:04,569 basehttp 11374 133187997009472 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2024-12-02 13:57:04,570 basehttp 11374 133187965552192 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2024-12-02 13:57:04,680 basehttp 11374 133187955066432 "GET /admin/jsi18n/ HTTP/1.1" 200 17546
+INFO 2024-12-02 13:57:05,698 basehttp 11374 133187955066432 "GET /admin/ HTTP/1.1" 200 37204
+INFO 2024-12-02 13:57:08,430 basehttp 11374 133187955066432 "GET /admin/education_platform/promocode/ HTTP/1.1" 200 77563
+INFO 2024-12-02 13:57:08,543 basehttp 11374 133187955066432 "GET /admin/jsi18n/ HTTP/1.1" 200 17546
+INFO 2024-12-02 13:57:19,300 basehttp 11374 133187955066432 "GET /admin/education_platform/promocode/add/ HTTP/1.1" 200 37261
+INFO 2024-12-02 13:57:19,503 basehttp 11374 133187955066432 "GET /admin/jsi18n/ HTTP/1.1" 200 17546
+INFO 2024-12-02 13:57:32,820 basehttp 11374 133187955066432 "POST /admin/education_platform/promocode/add/ HTTP/1.1" 302 0
+INFO 2024-12-02 13:57:33,022 basehttp 11374 133187955066432 "GET /admin/education_platform/promocode/ HTTP/1.1" 200 78344
+INFO 2024-12-02 13:57:33,177 basehttp 11374 133187955066432 "GET /admin/jsi18n/ HTTP/1.1" 200 17546
+INFO 2024-12-02 13:57:43,427 basehttp 11374 133187955066432 "POST /academy/ajax/use_promo_code_view HTTP/1.1" 200 259
+INFO 2024-12-02 13:57:43,641 basehttp 11374 133187955066432 "GET /__debug__/history_sidebar/?store_id=68ce393a26674184bca725e7cf26cfd5 HTTP/1.1" 200 14287
+INFO 2024-12-02 13:58:04,053 basehttp 11374 133187955066432 "GET /academy/personal_account/ HTTP/1.1" 200 28123
+INFO 2024-12-02 13:58:07,826 basehttp 11374 133187955066432 "GET /academy/personal_account/my_courses/ HTTP/1.1" 200 47037
+INFO 2024-12-02 13:58:35,278 basehttp 11374 133187955066432 "GET /academy/courses/kurs-s-dvumya-shagami/ HTTP/1.1" 200 30529
+INFO 2024-12-02 13:58:35,487 basehttp 11374 133187955066432 "GET /media/media/education_platform/images/promo_in_dashboard/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B02.jpg HTTP/1.1" 200 140339
+INFO 2024-12-02 13:58:35,497 basehttp 11374 133187965552192 "GET /media/media/education_platform/images/promo_in_dashboard/django_image.jpeg HTTP/1.1" 200 5377
+INFO 2024-12-02 13:58:37,710 basehttp 11374 133187965552192 "GET /academy/course/progress/69/125/ HTTP/1.1" 200 90964
+INFO 2024-12-02 13:59:01,640 basehttp 11374 133187965552192 "POST /academy/ajax_check_answer_for_question/ HTTP/1.1" 200 2011
+INFO 2024-12-02 13:59:01,660 basehttp 11374 133187955066432 "GET /static/education_platform/images/course_complete_logo.png HTTP/1.1" 200 174707
+INFO 2024-12-02 13:59:01,663 basehttp 11374 133187965552192 "GET /static/education_platform/images/course_complete_flowers.png HTTP/1.1" 200 849842
+INFO 2024-12-02 13:59:01,865 basehttp 11374 133187965552192 "GET /__debug__/history_sidebar/?store_id=0e35a21fc64d495abf8f36f25332de42 HTTP/1.1" 200 14380
+INFO 2024-12-02 13:59:05,756 basehttp 11374 133187965552192 "GET /academy/course/progress/69/125/ HTTP/1.1" 200 93155
+INFO 2024-12-02 13:59:20,728 basehttp 11374 133187965552192 "POST /academy/course/progress/125/ajax_add_comment HTTP/1.1" 200 1552
+INFO 2024-12-02 13:59:20,948 basehttp 11374 133187965552192 "GET /__debug__/history_sidebar/?store_id=453ce4b0553e46ff8c282d0715defe19 HTTP/1.1" 200 14385
+INFO 2024-12-02 13:59:45,237 basehttp 11374 133187965552192 "GET /academy/personal_account/my_certificates/ HTTP/1.1" 200 26496
+INFO 2024-12-02 13:59:57,106 basehttp 11374 133187965552192 "GET /academy/cert/222/ HTTP/1.1" 200 29602
+WARNING 2024-12-02 13:59:57,553 log 11374 133187986523712 Not Found: /style.css
+WARNING 2024-12-02 13:59:57,553 basehttp 11374 133187986523712 "GET /style.css HTTP/1.1" 404 19600
+INFO 2024-12-02 13:59:57,557 basehttp 11374 133187986523712 "GET /static/education_platform/css/certificate_style.css HTTP/1.1" 200 3338
+WARNING 2024-12-02 13:59:57,633 log 11374 133187986523712 Not Found: /Montserrat-MediumItalic.ttf
+WARNING 2024-12-02 13:59:57,633 basehttp 11374 133187986523712 "GET /Montserrat-MediumItalic.ttf HTTP/1.1" 404 19672
+WARNING 2024-12-02 13:59:57,736 log 11374 133187986523712 Not Found: /Montserrat-Bold.ttf
+WARNING 2024-12-02 13:59:57,738 basehttp 11374 133187986523712 "GET /Montserrat-Bold.ttf HTTP/1.1" 404 19640
+WARNING 2024-12-02 13:59:57,806 log 11374 133187976037952 Not Found: /Montserrat-BoldItalic.ttf
+WARNING 2024-12-02 13:59:57,806 basehttp 11374 133187976037952 "GET /Montserrat-BoldItalic.ttf HTTP/1.1" 404 19664
+INFO 2024-12-02 13:59:57,829 basehttp 11374 133187976037952 "GET /static/education_platform/images/certificate_images/certificate_border.png HTTP/1.1" 200 1329502
+INFO 2024-12-02 13:59:57,954 basehttp 11374 133187976037952 "GET /media/media/education_platform/images/signatures/course_complete_logo.png HTTP/1.1" 200 174707
+INFO 2024-12-02 13:59:57,980 basehttp 11374 133187976037952 "GET /static/education_platform/images/certificate_images/footer_logo.svg HTTP/1.1" 200 5894
+INFO 2024-12-02 13:59:58,467 basehttp 11374 133187965552192 "GET /academy/certificate/222/image HTTP/1.1" 200 220062
+INFO 2024-12-02 14:00:02,604 basehttp 11374 133187965552192 "GET /academy/cert/228/ HTTP/1.1" 200 29691
+WARNING 2024-12-02 14:00:02,846 log 11374 133188007495232 Not Found: /style.css
+WARNING 2024-12-02 14:00:02,847 basehttp 11374 133188007495232 "GET /style.css HTTP/1.1" 404 19600
+INFO 2024-12-02 14:00:02,850 basehttp 11374 133188007495232 "GET /static/education_platform/css/certificate_style.css HTTP/1.1" 200 3338
+WARNING 2024-12-02 14:00:02,952 log 11374 133188007495232 Not Found: /Montserrat-MediumItalic.ttf
+WARNING 2024-12-02 14:00:02,953 basehttp 11374 133188007495232 "GET /Montserrat-MediumItalic.ttf HTTP/1.1" 404 19672
+WARNING 2024-12-02 14:00:03,026 log 11374 133188007495232 Not Found: /Montserrat-Bold.ttf
+WARNING 2024-12-02 14:00:03,029 basehttp 11374 133188007495232 "GET /Montserrat-Bold.ttf HTTP/1.1" 404 19640
+WARNING 2024-12-02 14:00:03,139 log 11374 133188007495232 Not Found: /Montserrat-BoldItalic.ttf
+WARNING 2024-12-02 14:00:03,139 basehttp 11374 133188007495232 "GET /Montserrat-BoldItalic.ttf HTTP/1.1" 404 19664
+INFO 2024-12-02 14:00:03,154 basehttp 11374 133188007495232 "GET /static/education_platform/images/certificate_images/certificate_border.png HTTP/1.1" 200 1329502
+INFO 2024-12-02 14:00:03,256 basehttp 11374 133188007495232 "GET /media/media/education_platform/images/signatures/signature_elena_pSjFVFZ.svg HTTP/1.1" 200 15987
+INFO 2024-12-02 14:00:03,259 basehttp 11374 133187976037952 "GET /static/education_platform/images/certificate_images/footer_logo.svg HTTP/1.1" 200 5894
+INFO 2024-12-02 14:00:03,670 basehttp 11374 133187965552192 "GET /academy/certificate/228/image HTTP/1.1" 200 202298
+INFO 2024-12-02 14:00:32,044 basehttp 11374 133187965552192 "GET /blog/ HTTP/1.1" 200 46874
+INFO 2024-12-02 14:00:32,375 basehttp 11374 133187965552192 "GET /media/blog/images/2024/07/12/1_r87gaSu.jpg HTTP/1.1" 200 93074
+INFO 2024-12-02 14:00:32,392 basehttp 11374 133187997009472 "GET /media/blog/images/2024/07/12/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B02_cxlzNoo.jpg HTTP/1.1" 200 140339
+INFO 2024-12-02 14:00:32,394 basehttp 11374 133187955066432 "GET /media/blog/images/2024/07/12/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B02_FMmDp7X.jpg HTTP/1.1" 200 140339
+INFO 2024-12-02 14:00:35,403 basehttp 11374 133187955066432 "GET /blog/ HTTP/1.1" 200 46873
