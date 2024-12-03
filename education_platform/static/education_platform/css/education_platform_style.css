@@ -1414,6 +1414,13 @@ nav {
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
+@media (max-width: 768px) {
+    .step_main_content.container-fluid img {
+        width: unset !important;
+        height: unset !important;
+    }
+}
+
 
 /* ========================== /Step-Detail rules ================================ */
 
