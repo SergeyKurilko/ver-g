@@ -1,7 +1,7 @@
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from education_platform.models import TrainingCourseBlock, TrainingCourse, \
-    QuestionForStep, StepForPoint, CoursePack, PromoCode
+    QuestionForStep, StepForPoint, CoursePack, PromoCode, PointForTrainingBlock
 
 
 class PromoCodeAdminForm(forms.ModelForm):
@@ -77,3 +77,9 @@ class StepForPointForm(forms.ModelForm):
     class Meta:
         model = StepForPoint
         fields = '__all__'
+
+
+class PointForTrainingBlockForm(forms.ModelForm):
+    class Meta:
+        model = PointForTrainingBlock
+        fields = ['title', 'image', 'number']

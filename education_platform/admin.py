@@ -5,7 +5,7 @@ from django.utils import timezone
 import nested_admin
 
 from education_platform.admin_forms import TrainingCourseForm, QuestionForStepForm, StepForPointForm, \
-    CoursePackForm, PromoCodeAdminForm
+    CoursePackForm, PromoCodeAdminForm, PointForTrainingBlockForm
 from education_platform.models import Student, TrainingCourse, AccessToCourse, TrainingCourseBlock, \
     QuestionForStep, AnswerForQuestion, StepForPoint, TrainingCourseCategory, TrainingCourseSubCategory, \
     PointForTrainingBlock, Tag, WhatWillYouLearnItem, CourseProgress, CoursePack, PromoCode, PromoInDashboard, \
@@ -43,6 +43,7 @@ class StepForPointInline(nested_admin.NestedStackedInline):
 
 class PointForTrainingBlockInline(nested_admin.NestedStackedInline):
     model = PointForTrainingBlock
+    form = PointForTrainingBlockForm
     extra = 0
     inlines = [StepForPointInline]
 

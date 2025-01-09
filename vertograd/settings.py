@@ -70,40 +70,40 @@ VER_G_ADMIN_TELEGRAM_CHAT_IDS = [os.getenv("ELENA_CHAT_ID"), os.getenv("SERGEY_C
 # API KEY
 API_KEY_VER_G = os.getenv("API_KEY_VER_G")
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/ver_g_log.log'),
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'INFO',  # Установите уровень на INFO, чтобы не логировать SQL-запросы
-            'propagate': True,
-        },
-        'api': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+#             'style': '{',
+#         },
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': os.path.join(BASE_DIR, 'logs/ver_g_log.log'),
+#             'formatter': 'verbose',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'INFO',  # Установите уровень на INFO, чтобы не логировать SQL-запросы
+#             'propagate': True,
+#         },
+#         'api': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }
 # Application definition
 
 INSTALLED_APPS = [
@@ -192,7 +192,7 @@ DATABASES = {
     }
 }
 
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 2500
 
 
 # Password validation

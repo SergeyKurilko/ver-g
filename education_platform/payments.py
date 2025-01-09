@@ -1,7 +1,7 @@
 import json
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from yookassa import Configuration, Payment
@@ -45,28 +45,36 @@ def create_transaction_view(request):
     if request.method == 'POST':
         product_type = request.POST.get('product_type')
         product_id = request.POST.get('product_id')
-        amount = request.POST.get('amount')
-        promo_code_pk = request.POST.get('promo_code')
 
-        if promo_code_pk:
-            promo_code = PromoCode.objects.get(pk=promo_code_pk)
-        else:
-            promo_code = None
-
-
-        # TODO: Перед созданием транзакции проверить, есть ли promo_code_pk
+        # Перед созданием транзакции проверить, есть ли promo_code_pk
         # Если есть, то сохранить в транзакции ссылку на promocode
         # Далее, при получении callback от юкасса, удалить промокод
         promo_code_pk = request.POST.get('promo_code', None)
+
         user = request.user
 
-
-        amount = amount.replace(',', '.')
         idempotence_key = str(uuid.uuid4())
 
         if product_type == 'course':
-            course_title = request.POST.get('course_title')
+            course = get_object_or_404(
+                TrainingCourse,
+                id=product_id
+            )
+            course_title = course.title
             product_description = "курсу"
+            amount = course.price
+
+            # Если промокод пришел из формы (он прилет, только пройдя проверку)
+            if promo_code_pk:
+                promo_code = PromoCode.objects.get(pk=promo_code_pk)
+                amount = amount - ((amount * promo_code.sale_value) / 100)
+            else:
+                promo_code = None
+
+            # Если у курса есть действующая скидка:
+            course_discount = course.discount
+            if course_discount > 0:
+                amount = amount - ((amount * course_discount) / 100)
 
             return_url = (
                 reverse("education_platform:course_payment_successful",
@@ -77,23 +85,31 @@ def create_transaction_view(request):
                     "value": amount,
                     "currency": "RUB"
                 },
+                "receipt": {
+                    "customer": {
+                    "email": user.email,
+                    "full_name": f"{user.first_name} {user.last_name}"
+                },
+                "items": [
+                            {
+                                "description": f'Доступ к {product_description}'
+                                               f' "{course_title}"',
+                                "quantity": 1.000,
+                                "amount": {
+                                    "value": amount,
+                                    "currency": "RUB"
+                                },
+                                "vat_code": 1,
+                                "payment_mode": "full_prepayment",
+                                "payment_subject": "service"
+                            }
+                    ]
+                },
                 "confirmation": {
                     "type": "redirect",
                     # TODO: поменять на корректный
                     "return_url":
                         f"{settings.YOOKASSA_RETURN_URL}{product_type}/{product_id}/"
-                },
-                "customer": {
-                    # TODO поменять на корректный email
-                    "email": "kurservlad@yandex.ru",
-                    "full_name": f"{user.first_name} {user.last_name}"
-                },
-                "items": {
-                    "description": course_title,
-                    "amount": {
-                        "value": amount,
-                        "currency": "RUB"
-                    }
                 },
                 "capture": True,
                 "description": f'Оплата доступа к {product_description}'
@@ -102,27 +118,29 @@ def create_transaction_view(request):
             }, idempotency_key=idempotence_key)
 
             if payment.status == "pending":
-                transaction, created = Transaction.objects.get_or_create(
-                    user=user,
-                    amount=amount,
-                    # payment_id=payment.id,
-                    # status=payment.status,
-                    product_type=product_type,
-                    product_id=product_id,
-                    promo_code=promo_code
-                )
-
-                # Если транзакция новая, то добавляем актуальные данные из payment
-                if created:
-                    transaction.status = payment.status
+                try:
+                    # Если транзакция уже создавалась для этого продукта и этого пользователя,
+                    # то актуализируем данные в полях (стоимость, payment_id и промокод)
+                    transaction = Transaction.objects.get(
+                        user=user,
+                        product_type=product_type,
+                        product_id=product_id,
+                    )
+                    transaction.amount = amount
                     transaction.payment_id = payment.id
+                    transaction.promo_code = promo_code
                     transaction.save()
-
-                # Если транзакция уже создавалась, то актуализируем данные из payment
-                else:
-                    transaction.status = payment.status
-                    transaction.payment_id = payment.id
-                    transaction.save()
+                except Transaction.DoesNotExist:
+                    # Если транзакции нет, то создаем новую
+                    transaction = Transaction.objects.create(
+                        user=user,
+                        amount=amount,
+                        status = payment.status,
+                        payment_id = payment.id,
+                        product_type=product_type,
+                        product_id=product_id,
+                        promo_code = promo_code,
+                    )
 
                 return redirect(payment.confirmation.confirmation_url)
             else:
@@ -130,13 +148,20 @@ def create_transaction_view(request):
                     "error": "Ошибка при создании платежа"}
                     , status=500)
 
+        # Логика покупки пакета курсов
         elif product_type == 'course_pack':
+            course_pack = get_object_or_404(
+                CoursePack,
+                id=product_id
+            )
             course_pack_title = request.POST.get('course_pack_title')
             product_description = "пакету курсов"
 
             return_url = (
                 reverse("education_platform:course_payment_successful",
                         args=[product_type, product_id]))
+
+            amount = course_pack.price
 
             payment = Payment.create({
                 "amount": {
@@ -151,7 +176,7 @@ def create_transaction_view(request):
                 },
                 "customer": {
                     # TODO поменять на корректный email
-                    "email": "kurservlad@yandex.ru",
+                    "email": user.email,
                     "full_name": f"{user.first_name} {user.last_name}"
                 },
                 "items": {
@@ -168,26 +193,27 @@ def create_transaction_view(request):
             }, idempotency_key=idempotence_key)
 
             if payment.status == "pending":
-                transaction, created = Transaction.objects.get_or_create(
-                    user=user,
-                    amount=amount,
-                    # payment_id=payment.id,
-                    # status=payment.status,
-                    product_type=product_type,
-                    product_id=product_id
-                )
-
-                # Если транзакция новая, то добавляем актуальные данные из payment
-                if created:
-                    transaction.status = payment.status
+                try:
+                    # Если транзакция уже создавалась для этого продукта и этого пользователя,
+                    # то актуализируем данные в полях (стоимость, payment_id)
+                    transaction = Transaction.objects.get(
+                        user=user,
+                        product_type=product_type,
+                        product_id=product_id,
+                    )
+                    transaction.amount = amount
                     transaction.payment_id = payment.id
                     transaction.save()
-
-                # Если транзакция уже создавалась, то актуализируем данные из payment
-                else:
-                    transaction.status = payment.status
-                    transaction.payment_id = payment.id
-                    transaction.save()
+                except Transaction.DoesNotExist:
+                    # Если транзакции нет, то создаем новую
+                    transaction = Transaction.objects.create(
+                        user=user,
+                        amount=amount,
+                        status=payment.status,
+                        payment_id=payment.id,
+                        product_type=product_type,
+                        product_id=product_id,
+                    )
 
                 return redirect(payment.confirmation.confirmation_url)
             else:

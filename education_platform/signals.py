@@ -143,4 +143,12 @@ def send_telegram_message_on_create_access(sender, instance, **kwargs):
     send_telegram_create_access_to_course.delay(course_access)
 
 
-
+@receiver(post_save, sender=StepForPoint)
+def update_point_time_to_study_on_step_change(sender, instance, **kwargs):
+    """
+    При изменении или добавлении step высчитывается
+    time_to_study для его point_for_training_block
+    """
+    point = instance.point_for_training_block
+    point.time_to_study = point.steps.count() * 5
+    point.save(update_fields=['time_to_study'])

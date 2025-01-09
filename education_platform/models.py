@@ -308,6 +308,7 @@ class PointForTrainingBlock(models.Model):
     # views_counter = models.PositiveIntegerField(verbose_name='Количество просмотревших урок', default=0)
     # completed_counter = models.PositiveIntegerField(verbose_name='Количество прошедших урок', default=0)
 
+
     def get_absolute_url(self):
         """
         Возвращает ссылку на первый шаг в поинте
@@ -578,7 +579,7 @@ class Transaction(models.Model):
                                     verbose_name='Тип продукта')
     product_id = models.PositiveIntegerField(verbose_name='ID продукта')
     promo_code = models.ForeignKey(to="PromoCode",
-                                   on_delete=models.CASCADE,
+                                   on_delete=models.SET_DEFAULT,
                                    verbose_name='Промокод',
                                    related_name='promo_codes',
                                    blank=True,
