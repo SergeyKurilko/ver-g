@@ -22,16 +22,16 @@
             <!-- -->
             <div class="col-12 col-md-3 py-3 avatar-container-col">
                 {% if student.avatar %}
-                <div class="row mb-2 text-center"><h4>{{ student.user.first_name }}</h4></div>
-                <div class="row avatar-image-container justify-content-center">
+                <div class="d-none d-md-flex row mb-2 text-center"><h4>{{ student.user.first_name }}</h4></div>
+                <div class="d-none d-md-flex row avatar-image-container justify-content-center">
                     <span class="circle-avatar-image">
                         <img class="avatar-img" src="{{ student.avatar.url }}" alt="">
                     </span>
                 </div>
                 
                 {% else %}
-                <div class="row mb-2 text-center"><h4>{{ student.user.first_name }}</h4></div>
-                <div class="row avatar-image-container justify-content-center">
+                <div class="d-none d-md-flex row mb-2 text-center"><h4>{{ student.user.first_name }}</h4></div>
+                <div class="d-none d-md-flex row avatar-image-container justify-content-center">
                     <span class="circle-avatar-image" style="background-color: #cccccc !important">
                         <img class="avatar-img" src="{% static 'education_platform/common_icons/blank_avatar.svg' %}" alt="">
                     </span>
