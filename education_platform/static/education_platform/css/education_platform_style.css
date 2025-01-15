@@ -63,6 +63,7 @@ img {
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    background-color: #f4f9fb;
 }
 
 body {
@@ -185,11 +186,11 @@ section {
 
 
 input[type=checkbox] {
-    accent-color: #81C784;
+    accent-color: #4abccf;
 }
 
 input[type=checkbox]:not {
-    accent-color: #81C784;
+    accent-color: #4abccf;
     border: none;
 }
 
@@ -345,21 +346,51 @@ nav {
 
 .course-card {
     border: 1px solid var(--gray-color);
-    margin: 0 5px;
-    padding: 20px 20px;
-    height: 300px;
+    padding: 10px 20px 20px;
+    height: 250px;
     border-radius: 5px;
-    margin-bottom: 5px;
     transition: all 0.4s;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     cursor: grab;
+    margin: 6px 5px;
 }
 
 .course-card:hover {
     box-shadow: 2px 1px 6px 2px rgba(255, 166, 0, .3);
 }
+
+/****************************** Course card back  ***********************************************/
+
+.course-card-back_1,
+.course-card-back_3,
+.course-card-back_5 {
+    background-color: rgba(186, 235, 48, 1);
+    border: none;
+}
+
+.course-card-back_2,
+.course-card-back_4,
+.course-card-back_6 {
+    background-color: rgba(62, 129, 155, 1);
+    border: none;
+}
+
+.course-card-back_1:hover,
+.course-card-back_3:hover,
+.course-card-back_5:hover {
+    box-shadow: 0px 0px 5px 3px rgba(186, 235, 48, 0.4);
+}
+
+.course-card-back_2:hover,
+.course-card-back_4:hover,
+.course-card-back_6:hover {
+    box-shadow: 0px 0px 5px 3px rgba(62, 129, 155, 0.4);
+}
+
+/****************************** /Course card back  ***********************************************/
+
 
 .last-course-card {
     cursor: pointer;
@@ -489,7 +520,7 @@ nav {
 .course-card-vg-logo-4 img {
     position: absolute;
     opacity: 0.2;
-    top: -14px;
+    top: 5px;
     right: 57px;
     transform: rotate(-14deg);
     height: 45px;
@@ -509,12 +540,11 @@ nav {
 }
 
 .course-card-top img {
-    width: 85px !important;
-    height: 85px;
+    width: 90px !important;
+    height: 90px;
     position: absolute;
     top: 20px;
-    right: 20px;
-    border: 0.5px solid var(--gray-color);
+    right: 24px;
     border-radius: 5px;
 }
 
@@ -523,8 +553,8 @@ nav {
     transition: all 0.3s;
 }
 
-.course-card-top a:hover {
-    color: var(--orange-accent-color);
+.course-card-top a span:hover {
+    text-decoration: underline;
 }
 
 .course-card-top a span {
@@ -542,7 +572,6 @@ nav {
 
 .course-card-widgets {
     display: flex;
-    margin-left: 5px;
 }
 
 .course-card-widgets div img {
@@ -555,7 +584,6 @@ nav {
 }
 
 .course-card-price {
-    margin-left: 5px;
     margin-top: 5px;
 }
 
@@ -573,7 +601,6 @@ nav {
 
 .course-card-detail-button a,
 .course-pack-card-detail-button a {
-    margin-left: 5px;
     padding: 8px;
     background-color: var(--contrast-color);
     color: var(--ver-g-white-text);
@@ -604,7 +631,8 @@ nav {
 .course-card-promo {
     position: absolute;
     right: 21px;
-    top: 43%;
+    top: 65%;
+    display: flex;
 }
 
 .course-card-promo>div {
@@ -659,7 +687,7 @@ nav {
 .next-course-card-owl-button,
 .next-course-pack-card-owl-button {
     position: absolute;
-    top: 172px;
+    top: 143px;
     right: -7px;
     z-index: 5;
     border-radius: 50%;
@@ -1354,7 +1382,7 @@ nav {
 
 .left_button_for_point_list:hover {
     opacity: 0.8;
-    color: #7fff00;
+    color: var(--ver-g-min-color);
 }
 
 .step_nav_buttons {
@@ -1377,7 +1405,7 @@ nav {
 }
 
 #sendAnswerButton {
-    background-color: var(--ver-g-green-buttons);
+    background-color: #4abccf;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
     transition: all 0.3s;
     border: none;
@@ -2346,11 +2374,11 @@ nav {
 
 
 .step_detail-header_wrapper {
-    background-color: #eff4f1;
+    background-color: #f4f9fb;
 }
 
 .step_main_content_wrapper {
-    background-color: #e1ebe4;
+    background-color: #e1f0f5;
 }
 
 .step_video-container_wrapper {
@@ -2359,12 +2387,16 @@ nav {
     border-bottom: 1px solid #e9dddd;
 }
 
-/* .step_navigation_buttons-wrapper {
-    background-color: #d2ffe3;
-} */
+.step_navigation_buttons-wrapper {
+    background-color: #f4f9fb;
+}
 
 .question_container-wrapper {
-    background-color: #eff4f1;
+    background-color: #e1f0f5;
+}
+
+.comments-place__wrapper {
+    background-color: #f4f9fb;
 }
 
 .step_detail_total_wrapper {
@@ -2376,7 +2408,7 @@ nav {
 
 .step_main_content-wrapper {
     flex-grow: 1;
-
+    background-color: #f4f9fb;
 }
 
 .left_button_for_point_text {
@@ -2427,27 +2459,33 @@ nav {
 }
 
 .point-list-left-menu-accordion .accordion-button {
-    color: black;
-    background: var(--ver-g-space-wider-gradient);
+    color: var(--ver-g-white-text);
+    background: var(--contrast-color);
     border-radius: 5px !important;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
     font-size: 1.2rem;
+    transition: all 0.3s;
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    /*--bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");*/
 }
 
+
 .point-list-left-menu-accordion .accordion-button:not(.collapsed) {
-    background-color: #54ad54;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+    /*background-color: #54ad54;*/
+    background-color: var(--orange-accent-color);
+    color: var(--contrast-color);
+    /*box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);*/
 }
 
 .point-list-left-menu-accordion .accordion-button:focus {
-    border-color: green;
+    /*border-color: green;/*
     /* Цвет обводки при фокусе */
-    box-shadow: 0 0 0 0.25rem rgba(0, 128, 0, 0.25);
+    /*box-shadow: 0 0 0 0.25rem rgba(0, 128, 0, 0.25);*/
     /* Тень при фокусе */
 }
 
 .point-list-left-menu-accordion .accordion-button:active {
-    border-color: green;
+    /*border-color: green;*/
     /* Цвет обводки при активном состоянии */
 }
 
@@ -2516,8 +2554,7 @@ nav {
     width: 130px;
     height: 130px;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
-    /* border: 0.5px solid rgba(0, 0, 0, 0.3); */
-    border: 0.5px solid var(--orange-accent-color);
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
     padding: 0 !important;
 }
 
