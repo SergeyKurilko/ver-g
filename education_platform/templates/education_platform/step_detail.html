@@ -32,11 +32,13 @@
         <div class="container-fluid step_detail-header_wrapper">
             <div class="py-4 step_detail-header container-fluid container-md">
                 <div class="row">
-                    <div class="col-lg-3 col-12">
+                    <div class="col-12">
                         <h3>
                             {{ progress.current_block.number }}.{{ progress.current_point.number|floatformat:"0" }}
                             {{ step.point_for_training_block.title }}
                         </h3>
+                    </div>
+                    <div class="col-lg-3 col-12">
                         <span class="text-muted">Шаг {{ step.number }} из {{ step.point_for_training_block.total_steps_in_point }}</span>
                         {% if step_is_completed %} <br>
                         <span style="font-size: small; color: green;">
