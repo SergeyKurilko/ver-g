@@ -12,6 +12,8 @@
     var token_for_rate = {{ token_for_rate|safe }}
 </script>
 
+    <div class="article-progress-bar"></div>
+
     <div class="service_category_detail_header">
         <div class="service_category_detail_line"></div>
         <div class="service_category_detail_title">{{ article.title }}</div>
@@ -152,6 +154,29 @@
 
 
     </div>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous">
+
+    </script>
+
+    <script>
+    $(document).ready(function() {
+        $(window).scroll(function() {
+        // Вычисляем, сколько прокручено
+            var scrollTop = $(this).scrollTop();
+            var docHeight = $(document).height();
+            var winHeight = $(this).height();
+
+            // Вычисляем процент прокрутки
+            var progress = (scrollTop / (docHeight - winHeight)) * 100;
+
+            // Обновляем ширину прогресс-бара
+            $('.article-progress-bar').css('width', progress + '%');
+        });
+    });
+    </script>
 
 
 {% endblock %}

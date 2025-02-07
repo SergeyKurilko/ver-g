@@ -2568,6 +2568,7 @@ nav {
     border: 0.5px solid rgba(0, 0, 0, 0.3);
     padding: 0 !important;
     max-width: none;
+    object-fit: cover;
 }
 
 .step_avatar-image.no-foto {

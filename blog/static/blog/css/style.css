@@ -1015,6 +1015,16 @@ h3.modal-title.consultation {
     color: white !important;
 }
 
+.article-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background-color: #4caf50;
+    width: 0%;
+    z-index: 1000;
+}
+
 .paginator_container {
     position: relative !important;
     display: flex !important;
